@@ -1,0 +1,107 @@
+% \usetikzlibrary{shapes, backgrounds}
+\tikzset{x=1cm, y=1cm} % Default tikz units
+
+% & Name
+% 		\vcenteredhbox
+% & Description
+% 		Command to vertically centre adjacent content
+% & Arguments
+% 		1: content to centre
+% & Examples
+% 		\vcenteredhbox{Hello World}
+\newcommand{\vcenteredhbox}[1]{% The only parameter is for the content to centre
+	\begingroup%
+		\setbox0=\hbox{#1}\parbox{\wd0}{\box0}%
+	\endgroup%
+}
+
+% & Name
+% 		\cvsect
+% & Description
+% 		Displays a section title with a black background and white text
+% & Arguments
+% 		1: section text
+% & Examples
+% 		\cvsect{Some Section}
+\newcommand{\cvsect}[1]{% The only parameter is the section text
+	\vspace{\baselineskip} % Whitespace before the section title
+	\colorbox{black}{\textcolor{white}{\MakeUppercase{\textbf{#1}}}}\\% Section title
+}
+
+% & Name
+% 		\blackboxed
+% & Description
+% 		Displays a black rectangular box with white bold text
+% & Arguments
+% 		1: text
+% & Examples
+% 		\blackboxed{Hello World}
+\newcommand{\blackboxed}[1]{%
+	\colorbox{black}{\textcolor{white}{\textbf{#1}}}%
+}
+
+
+% & Name
+% 		\icon
+% & Description
+% 		Displays an icon with text
+% & Arguments
+% 		1: icon name
+% 		2: box size
+% 		3: text
+% & Examples
+% 		\icon{Github}{1cm}{GitHub}
+% 		\icon{Twitter}{1cm}{Twitter}
+% 		\icon{Envelope}{1cm}{Email}
+\newcommand{\icon}[3]{%
+	\vcenteredhbox{\colorbox{black}{\makebox(#2, #2){\textcolor{white}{\large\csname fa#1\endcsname}}}}% Icon and box
+	\hspace{0.2cm}% Whitespace
+	\vcenteredhbox{\textcolor{black}{#3}}% Text
+}
+
+
+%%%%%%%% VARIANTES COLOREES	%%%%%%%%%%%%
+
+% & Name
+% 		\redboxed
+% & Description
+% 		Displays a red rectangular box with white bold text
+% & Arguments
+% 		1: text
+% & Examples
+% 		\redboxed{Hello World}
+\newcommand{\redboxed}[1]{%
+\colorbox{flatuicolors_tomato}{\textcolor{white}{\textbf{#1}}}%
+}
+
+% & Name
+% 		\greenboxed
+% & Description
+% 		Displays a green rectangular box with white bold text
+% & Arguments
+% 		1: text
+% & Examples
+% 		\greenboxed{Hello World}
+\newcommand{\greenboxed}[1]{%
+\colorbox{flatuicolors_green}{\textcolor{white}{\textbf{#1}}}%
+}
+
+% Make a rectangular box with blue background and white bold text
+\newcommand{\blueboxed}[1]{%
+\colorbox{flatuicolors_blue_devil}{\textcolor{white}{\textbf{#1}}}%
+}
+
+% Make a rectangular box with purple background and white bold text
+\newcommand{\purpleboxed}[1]{%
+\colorbox{flatuicolors_purple_dark}{\textcolor{white}{\textbf{#1}}}%
+}
+
+% Make a rectangular box with orange background and white bold text
+\newcommand{\orangeboxed}[1]{%
+\colorbox{flatuicolors_orange}{\textcolor{white}{\textbf{#1}}}%
+}
+
+% Make a rectangular box with aqua background and white bold text
+\newcommand{\aquaboxed}[1]{%
+\colorbox{flatuicolors_aqua}{\textcolor{white}{\textbf{#1}}}%
+}

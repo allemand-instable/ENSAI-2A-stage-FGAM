@@ -1,0 +1,12 @@
+% & Name
+% 		\circled
+% & Description
+% 		Displays a circled text
+% & Arguments
+% 		1: text
+% & Examples
+% 		\circled{1}
+% 		\circled{A}
+\newcommand*{\circled}[1]{\tikz[baseline=(char.base)]{%
+\node[shape=circle,draw,inner sep=2pt] (char) {#1};}%
+}

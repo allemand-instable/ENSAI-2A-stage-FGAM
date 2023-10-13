@@ -1,0 +1,105 @@
+%%  notation convergence
+% uses mathtools package
+% & Name
+% 		\cvl
+% & Description
+% 		Flèche de la convergence en loi
+% & Arguments
+% 		1: variable de la convergence
+% 		2: target de la convergence
+% & Examples
+% 		\cvl{n}{+\infty}
+\newcommand{\cvl}[2]{\xrightarrow[#1 \rightarrow #2]{\ \mathcal L \ } \ }
+
+% & Name
+% 		\cvp
+% & Description
+% 		Flèche de la convergence en probabilité
+% & Arguments
+% 		1: variable de la convergence
+% 		2: target de la convergence
+% & Examples
+% 		\cvp{n}{+\infty}
+\newcommand{\cvp}[2]{\xrightarrow[#1 \rightarrow #2]{\ \mathbb P \ } }
+
+% & Name
+% 		\cvps
+% & Description
+% 		Flèche de la convergence presque sûre
+% & Arguments
+% 		1: variable de la convergence
+% 		2: target de la convergence
+% & Examples
+% 		\cvps{n}{+\infty}
+\newcommand{\cvps}[2]{\xrightarrow[#1 \rightarrow #2]{\ \textsf{p.s}\ } \ }
+
+% & Name
+% 		\cvL
+% & Description
+% 		Flèche de la convergence en L^p
+% & Arguments
+% 		1: p
+% 		2: variable de la convergence
+% 		3: target de la convergence
+% & Examples
+% 		\cvL{p}{n}{+\infty}
+\newcommand{\cvL}[3]{\xrightarrow[#2 \rightarrow #3]{\ \mathbb L ^{#1} \ }}
+
+% & Name
+% 		\cvetr
+% & Description
+% 		Flèche de la convergence étroite
+% & Arguments
+% 		1: variable de la convergence
+% 		2: target de la convergence
+% & Examples
+% 		\cvetr{n}{+\infty}
+\newcommand{\cvetr}[2]{\xrightarrow[#1 \rightarrow #2]{ \ \textsf{étroit.} \ }}
+
+% & Name
+% 		\cvnorme
+% & Description
+% 		Flèche de la convergence en norme
+% & Arguments
+% 		1: subscript de la norme
+% 		2: variable de la convergence
+% 		3: target de la convergence
+% & Examples
+% 		\cvnorme{\infty}{x}{x_0}
+\newcommand{\cvnorme}[3]{\xrightarrow[\, #2 \rightarrow #3 \; ]{\, \lVert \cdot \rVert _{#1} \,} \ }
+
+% & Name
+% 		\cvpp
+% & Description
+% 		Flèche de la convergence en probabilité [mesure] presque partout
+% & Arguments
+% 		1: mesure
+% 		2: variable de la convergence
+% 		3: target de la convergence
+% & Examples
+% 		\cvpp{\mu}{n}{+\infty}
+\newcommand{\cvpp}[3]{ \xrightarrow[#2 \rightarrow #3]{#1 - p.p} }
+%%  autres
+% & Name
+% 		\tend
+% & Description
+% 		Flèche de la convergence
+% & Arguments
+% 		1: variable de la convergence
+% 		2: target de la convergence
+% & Examples
+% 		\tend{n}{+\infty}
+\newcommand{\tend}[2]{\xrightarrow[ #1 \rightarrow #2 ]{}}
+
+% & Name
+% 		\tendset
+% & Description
+% 		Flèche de la convergence avec un ensemble / superscript
+% & Arguments
+% 		1: variable de la convergence
+% 		2: target de la convergence
+% 		3: ensemble / superscript
+% & Examples
+% 		\tendset{n}{+\infty}{\mathcal F}
+% 		\tendset{n}{+\infty}{\textsf{Unif.} }
+\newcommand{\tendset}[3]{\xrightarrow[ #1 \rightarrow #2 ]{#3}}

@@ -1,0 +1,79 @@
+%% thm
+% \usepackage{theorem}
+\usepackage{amsthm}
+
+\newtheoremstyle{def_style}%                % Name
+{10pt}%                                     % Space above
+{10pt}%                                     % Space below
+% {\itshape}%
+{}                             % Body font
+{0pt}%                                     % Indent amount
+{\bfseries}%                            % Theorem head font
+{ }%                                    % Punctuation after theorem head
+{.5em}%                                    % Space after theorem head, ' ', or \newline
+{}% 
+
+\newtheoremstyle{thm_style}%                % Name
+{15pt}%                                     % Space above
+{15pt}%                                     % Space below
+% {\itshape}%                             % Body font
+{}
+{0pt}%                                     % Indent amount
+{\bfseries}%                            % Theorem head font
+{ }%                                    % Punctuation after theorem head
+{\newline}%                                    % Space after theorem head, ' ', or \newline
+{}% 
+
+
+% \theorembodyfont{\sffamily}
+% \theoremheaderfont{\bfseries}
+
+%% ========================================= %%
+
+\theoremstyle{def_style}
+
+\newtheorem{definition}{Définition}
+\newtheorem*{definition*}{Définition}
+
+%% ========================================= %%
+
+\theoremstyle{thm_style}
+
+\newtheorem{thm}{Théorème}
+
+\newtheorem{prop}{Proposition}[thm]
+
+\newtheorem{lem}{Lemme}[thm]
+
+\newtheorem{cor}{Corollaire}
+
+\newtheorem*{thm*}{Théorème}
+
+\newtheorem*{propriete*}{Propriété}
+
+\newtheorem*{cor*}{Corollaire}
+
+\newtheorem*{prop*}{Proposition}
+
+\newtheorem*{lem*}{Lemme}
+
+\newtheorem{exo}{Exercice}
+
+\newtheorem*{exo*}{Exercice}
+
+\newtheoremstyle{rem_style}%                % Name
+{5pt}%                                     % Space above
+{5pt}%                                     % Space below
+% {\itshape}%
+{}                             % Body font
+{0pt}%                                     % Indent amount
+{\emph}%                            % Theorem head font
+{ :}%                                    % Punctuation after theorem head
+{.5em}%                                    % Space after theorem head, ' ', or \newline
+{}% 
+
+\theoremstyle{rem_style}
+\newtheorem*{rem}{Remarque}
+
+
+%% ========================================= %%

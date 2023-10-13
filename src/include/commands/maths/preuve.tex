@@ -1,0 +1,59 @@
+\newcommand{\preuve}[1]{%
+	\begin{leftbar}%
+		\begin{proof}%
+			\textsf{}%
+			\bigskip%
+			#1%
+		\end{proof}%
+	\end{leftbar}%
+}
+
+
+\newcommand{\subproofsmall}[2]{%
+	\begin{minipage}{0.005\linewidth}%
+		\textsf{ }%
+	\end{minipage}%
+	\begin{minipage}{0.895\linewidth}%
+		\begin{leftbar}%
+			\begin{proof}%
+				[\faAngleRight \, \fbox{#1}]%
+				\textsf{ }%
+				\bigskip%
+				\\%
+				#2%
+			\end{proof}%
+		\end{leftbar}%
+	\end{minipage}%
+}
+
+\newcommand{\subproofmedium}[2]{%
+	\begin{minipage}{0.1\linewidth}%
+		\textsf{ }%
+	\end{minipage}%
+	\begin{minipage}{0.8\linewidth}%
+		\begin{leftbar}%
+			\begin{proof}%
+				[#1]%
+				\textsf{ }%
+				\bigskip%
+				#2%
+			\end{proof}%
+		\end{leftbar}%
+	\end{minipage}%
+}
+
+\newcommand{\subproofbig}[2]{%
+	\begin{minipage}{0.2\linewidth}%
+		\textsf{ }%
+	\end{minipage}%
+	\begin{minipage}{0.7\linewidth}%
+		\begin{leftbar}%
+			\begin{proof}%
+				[#1]%
+				\textsf{ }%
+				\bigskip%
+				#2%
+			\end{proof}%
+		\end{leftbar}%
+	\end{minipage}%
+}

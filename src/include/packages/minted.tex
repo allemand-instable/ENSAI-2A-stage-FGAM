@@ -1,0 +1,24 @@
+% ~ MINTED
+
+% \newcommand{\setcoderender}[1]{%
+% 	\newcounter{coderenderbool}%
+% 	\setcounter{coderenderbool}{#1}%
+% }
+
+% \newcommand{\ifcode}[1]{%
+% 	\ifnum1=\value{coderenderbool}%
+% 	{%
+% 		{#1}%
+% 	}%
+% 	\else
+% 	{%
+% 		%
+% 	}%
+% }
+
+
+\ifnum\value{code}=1
+	\usepackage[cache=false]{minted}
+
+	\usemintedstyle{one-dark}
+\fi

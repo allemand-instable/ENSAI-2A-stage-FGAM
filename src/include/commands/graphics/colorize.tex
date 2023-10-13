@@ -1,0 +1,19 @@
+% & Name
+% 		\colorize
+% & Description
+% 		Displays a colored text
+% & Arguments
+%       % [OPTIONAL]
+% 		1: color
+%       > default value: flatuicolors_blue
+%       % {MANDATORY}
+% 		2: text
+% & Examples
+% 		\colorize{Hello World}
+% 		\colorize[flatuicolors_green]{Hello World}
+\newcommand{\colorize}[2][flatuicolors_blue]{\color{#1} #2 \color{black}}
+
+
+\newcommand{\emphcolor}[2][flatuicolors_blue]{%
+    \color{#1} \mathbf{#2} \color{black}%
+}

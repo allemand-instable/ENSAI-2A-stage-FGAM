@@ -1,0 +1,61 @@
+\documentclass[11pt]{report}
+% ⚠️ DO NOT TOUCH ————————————
+% * include and settings
+% ✏️ note : include should be used in document environment → use of input here
+\input{include/include.tex}
+\input{settings.tex}
+% ⚠️ —————————————————————————
+
+
+% ⚠️ USE WHEN NO CITATION FROM BIB
+\nocite{*}
+% ⚠️ —————————————————————————
+
+
+% ⚙️ Table of Contents
+\dominitoc
+
+\begin{document}
+% ⚠️ DO NOT TOUCH ——————————————
+{
+    % * document environment commands
+    % ⚙️ INCLUDE COMMAND
+    \include{include/commands.tex}
+    % ⚙️ COURVERTURE 
+    \input{content/couverture/main.tex}
+    % \addtocontents{toc}{\protect\thispagestyle{empty}}
+    % \pagenumbering{gobble}
+    \pagenumbering{Roman}
+    % ⚙️ ABSTRACT
+    \include{content/abstract.tex}
+    % ⚙️ ToC
+    \tableofcontents
+    \pagebreak
+    \listoffigures
+    \listofalgorithms
+}
+% ⚠️ ———————————————————————————
+
+% ~ CONTENT ———————————————————————————
+% $ CHAPTERS
+% * ————— CHAPTER 1 —————
+\include{content/chapter_1/main.tex}
+% * ————— CHAPTER 2 —————
+\include{content/chapter_2/main.tex}
+% * ————— CHAPTER 3 —————
+\include{content/chapter_3/main.tex}
+% ~ ———————————————————————————————————
+
+
+% ~ APPENDIX ——————————————————————————
+\appendix
+\pagenumbering{roman}
+% * ————— APPENDIX —————
+\include{content/appendix/main.tex}
+% ~ ——————————————————————————————————
+
+\typeout{}
+\bibliography{bibliography/main}
+
+\end{document}
+

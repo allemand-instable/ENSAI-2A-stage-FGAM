@@ -1,0 +1,193 @@
+% & Name
+% 		\intervaleint
+% & Description
+% 		Interval notation with square brackets ⟦p,q⟧
+% & Arguments
+% 		1: lower bound
+% 		2: upper bound
+% & Examples
+% 		\intervaleint{p}{q}
+\newcommand{\intervaleint}[2]{\llbracket #1 \, , \, #2 \rrbracket}
+
+% & Name
+% 		\R
+% & Description
+% 		Espace ℝᴾ
+% & Arguments
+% 		1: dimension
+% & Examples
+% 		\R{p}
+%       \R p
+\newcommand{\R}[1]{\mathds{R} ^{#1}}
+
+% & Name
+% 		\classespace
+% & Description
+% 		Espace des fonctions de classe k sur un ensemble E : 𝒞ᵏ(E)
+% & Arguments
+% 		1: classe
+% 		2: ensemble
+% & Examples
+% 		\classespace{k}{E}
+\newcommand{\classespace}[2]{\mathcal C^{#1} \left( \, #2 \, \right)}%
+
+% & Name
+% 		\continuborne
+% & Description
+% 		Espace des fonctions continues et bornées sur un ensemble E dans F : 𝒞⁰ᵇ(E, F)
+% & Arguments
+% 		1: ensemble de départ
+% 		2: espace d'arrivée
+% & Examples
+% 		\continuborne{E}{F}
+\newcommand{\continuborne}[2]{\mathcal C^0_b \left( \, #1 \,, \, #2 \, \right)}%
+
+% & Name
+% 		\continusupportcompact
+% & Description
+% 		Espace des fonctions continues à support compact sur un ensemble E dans F : 𝒞⁰ₖ(E, F)
+% & Arguments
+% 		1: ensemble de départ
+% 		2: espace d'arrivée
+% & Examples
+% 		\continusupportcompact{E}{F}
+\newcommand{\continusupportcompact}[2]{\mathcal C^0_K \left( \, #1 \,, \, #2 \, \right)}%
+
+% & Name
+% 		\mesurable
+% & Description
+% 		Espace des fonctions mesurables sur un ensemble E dans F : 𝓜(E, F)
+% & Arguments
+% 		1: ensemble de départ
+% 		2: espace d'arrivée
+% & Examples
+% 		\mesurable{E}{F}
+\newcommand{\mesurable}[2]{\mathcal m\left( \, #1 \,, \, #2 \, \right)}%
+
+% & Name
+% 		\etageepositive
+% & Description
+% 		Espace des fonctions étagées positives sur un ensemble E dans F : 𝓔₊(E, F)
+% & Arguments
+% 		1: ensemble de départ
+% 		2: espace d'arrivée
+% & Examples
+% 		\etageepositive{E}{F}
+\newcommand{\etageepositive}[2]{\mathcal E_+\left( \, #1 \,, \, #2 \, \right)}%
+
+% & Name
+% 		\VA
+% & Description
+% 		Variable aléatoire à valeur dans un espace E : 𝕍A[E]
+% & Arguments
+% 		1: espace d'arrivée
+% & Examples
+% 		\VA{E}
+\newcommand{\VA}[1]{\mathds VA \bigl[ \, #1 \, \bigr]}%
+
+% & Name
+% 		\matrixspace
+% & Description
+% 		Espace des matrices carrées de taille n sur un espace E : 𝓜ₙ(E)
+% & Arguments
+% 		1: taille
+% 		2: espace d'arrivée
+% & Examples
+% 		\matrixspace{n}{E}
+\newcommand{\matrixspace}[2]{\mathcal M_{#1} \left( \, #2 \,  \right)}%
+
+% & Name
+% 		\orthonormal
+% & Description
+% 		symbole orthonormal : perp + norme en dessous
+% & Arguments
+% 		none
+% & Examples
+% 		\orthonormal
+\newcommand{\orthonormal}{\underset{\Vert \cdot \Vert}{\perp}}
+
+% & Name
+% 		\orthonormalselon
+% & Description
+% 		symbole orthonormal : perp + norme [spécifiée] en dessous
+% & Arguments
+% 		1: subscript de la norme
+% & Examples
+% 		\orthonormalselon{\infty}
+\newcommand{\orthonormalselon}[1]{\underset{\Vert \cdot \Vert_{#1}}{\perp}}
+
+
+% & Name
+% 		\grand[Lettre Maj]
+% & Description
+% 		lettre double stroke
+% & Arguments
+% 		none
+% & Examples
+% 		\grandR
+%       \grandQ
+%       \grandN
+%       \grandH
+\newcommand{\grandR}{\mathds{R}}%
+\newcommand{\grandZ}{\mathds{Z}}%
+\newcommand{\grandQ}{\mathds{Q}}%
+\newcommand{\grandN}{\mathds{N}}%
+\newcommand{\grandH}{\mathds{H}}%
+\newcommand{\grandW}{\mathds{W}}%
+\newcommand{\grandT}{\mathds{T}}%
+\newcommand{\grandJ}{\mathds{J}}%
+\newcommand{\grandL}{\mathds{L}}%
+\newcommand{\grandP}{\mathds{P}}%
+\newcommand{\grandK}{\mathds{K}}%
+\newcommand{\grandX}{\mathds{X}}%
+\newcommand{\grandY}{\mathds{Y}}%
+\newcommand{\grandB}{\mathds{B}}%
+\newcommand{\grandM}{\mathds{M}}%
+\newcommand{\grandA}{\mathds{A}}%
+\newcommand{\grandF}{\mathds{F}}%
+\newcommand{\grandI}{\mathds{I}}%
+\newcommand{\grandD}{\mathds{D}}%
+\newcommand{\grandV}{\mathds{V}}%
+\newcommand{\grandE}{\mathds{E}}%
+
+
+% & Name
+% 		\cal[Lettre Maj]
+% & Description
+% 		lettre calligraphiée
+% & Arguments
+% 		none
+\newcommand{\calF}{\mathcal{F}}%
+\newcommand{\calO}{\mathcal{O}}%
+\newcommand{\calL}{\mathcal{L}}%
+\newcommand{\calP}{\mathcal{P}}%
+\newcommand{\calM}{\mathcal{M}}%
+\newcommand{\calN}{\mathcal{N}}%
+\newcommand{\calA}{\mathcal{A}}%
+\newcommand{\calB}{\mathcal{B}}%
+\newcommand{\calC}{\mathcal{C}}%
+\newcommand{\calD}{\mathcal{D}}%
+\newcommand{\calE}{\mathcal{E}}%
+\newcommand{\calG}{\mathcal{G}}%
+\newcommand{\calH}{\mathcal{H}}%
+\newcommand{\calI}{\mathcal{I}}%
+\newcommand{\calJ}{\mathcal{J}}%
+\newcommand{\calK}{\mathcal{K}}%
+\newcommand{\calQ}{\mathcal{Q}}%
+\newcommand{\calR}{\mathcal{R}}%
+
+
+% & Name
+% 		\Rplus(etoile) / \Rmoins(etoile)
+% & Description
+% 		Ensembles ℝ₊ et ℝ₋
+% & Arguments
+% 		none
+% & Examples
+% 		\Rplus
+%       \Rmoins
+\newcommand{\Rplus}{\mathds R_{+}}%
+\newcommand{\Rmoins}{\mathds R_{-}}%
+\newcommand{\Rplusetoile}{\mathds R_{+}^{*}}%
+\newcommand{\Rmoinsetoile}{\mathds R_{-}^{*}}%
+\newcommand{\Retoile}{\mathds R^{*}}%

@@ -1,0 +1,27 @@
+\makeatletter
+\pgfmathdeclarefunction{weierstrass}{3}{%
+	\pgfmathfloattofixed@{#3}%
+	\afterassignment\pgfmath@x%
+	\expandafter\c@pgfmath@counta\pgfmathresult pt\relax%
+	\pgfmathfloatcreate{1}{0.0}{0}%
+	\let\pgfmathfloat@loc@TMPa=\pgfmathresult
+	\pgfmathfloatpi@%
+	\let\pgfmathfloat@loc@TMPd=\pgfmathresult%
+	\edef\pgfmathfloat@loc@TMPb{#1}%
+	\edef\pgfmathfloat@loc@TMPc{#2}%
+	\pgfmathloop
+	\ifnum\c@pgfmath@counta>0\relax%
+	\pgfmathfloatparsenumber{\the\c@pgfmath@counta}%
+	\pgfmathpow{\pgfmathresult}{\pgfmathfloat@loc@TMPc}%
+	\pgfmathfloatmultiply@{\pgfmathresult}{\pgfmathfloat@loc@TMPd}%
+	\let\pgfmathfloat@loc@TMPe=\pgfmathresult%
+	\pgfmathmultiply{\pgfmathresult}{\pgfmathfloat@loc@TMPb}%
+	\pgfmathdeg{\pgfmathresult}%
+	\pgfmathsin{\pgfmathresult}%
+	\pgfmathdivide{\pgfmathresult}{\pgfmathfloat@loc@TMPe}%
+	\pgfmathadd{\pgfmathresult}{\pgfmathfloat@loc@TMPa}%
+	\let\pgfmathfloat@loc@TMPa=\pgfmathresult
+	\advance\c@pgfmath@counta by-1\relax%
+	\repeatpgfmathloop%
+}
+\makeatother
