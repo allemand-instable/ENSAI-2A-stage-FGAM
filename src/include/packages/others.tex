@@ -21,3 +21,15 @@
 % https://tex.stackexchange.com/questions/39147/scale-image-to-page-width
 \usepackage{changepage}
 % \usepackage{doc}
+
+% > TO-DO LIST environment
+% https://tex.stackexchange.com/questions/247681/how-to-create-checkbox-todo-list
+\usepackage{enumitem}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\checked}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+	\hspace{-2.5pt}}
+\newcommand{\crossed}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}

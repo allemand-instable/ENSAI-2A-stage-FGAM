@@ -4,10 +4,72 @@
 
 %   fonctions mathématiques de proba
 
+
+% & Name
+%       \proba
+% & Description
+%       Probabilité d'un évènement : ℙ[ ⋯ ]
+% & Arguments
+%       1 : Evenement
+% & Examples
+%       \proba{ X \in \mathcal A }
 \newcommand{\proba}[1]{\mathds{P} \left[ \, #1 \, \right]}
+% & Name
+%       \probaloi
+% & Description
+%       Probabilité d'un évènement suivant la loi spécifiée : ℙₓ[ ⋯ ]
+% & Arguments
+%       1 : loi
+%       2 : Evenement
+% & Examples
+%       \probaloi{X \cap Y}{ XY = 7 }
 \newcommand{\probaloi}[2]{\mathds{P}_{#1} \left[ \, #2 \, \right]}
+% & Name
+%       \variance
+% & Description
+%       variance d'une variable aléatoire : 𝕍[ ⋯ ]
+% & Arguments
+%       1 : Variable Aléatoire
+% & Examples
+%       \variance{ \hat\theta }
 \newcommand{\variance}[1]{\mathds{V} \left[ \, #1 \, \right]}
+% & Name
+%       \esperance
+% & Description
+%       Espérance d'une variable aléatoire
+% & Arguments
+%       
+% & Examples
+%       
 \newcommand{\esperance}[1]{\mathds{E} \left[ \, #1 \, \right]}
+% & Name
+%       \esperanceloi
+% & Description
+%       Espérance d'une variable aléatoire selon la loi spécifiée : 𝔼ₓ[ ⋯ ]
+% & Arguments
+%       1 : loi
+%       2 : variable aléatoire
+% & Examples
+%       
 \newcommand{\esperanceloi}[2]{\mathds{E}_{#1} \left[ \, #2 \, \right]}
+% & Name
+%       \esperancesachant
+% & Description
+%       Espérance conditionnelle 𝔼[ Y | X ]
+% & Arguments
+%       1 : conditionnement
+%       2 : évènement
+% & Examples
+%       \esperancesachant{X}{Y}
 \newcommand{\esperancesachant}[2]{\mathds{E} \left[ \, #2 \, \vert \, #1 \, \right]}
-\newcommand{\esploisach}[3]{\mathds{E} \left[ \, #3 \, \vert \, #2 \, \right]_{#1}}
+% & Name
+%       \esploisach
+% & Description
+%       Espérance conditionnelle selon la loi spécifiée : 𝔼ₚ[ Y | X ]
+% & Arguments
+%       1 : loi
+%       2 : conditionnement
+%       3 : evenement
+% & Examples
+%       \esploisach{p}{X}{Y}
+\newcommand{\esploisach}[3]{{\mathds{E}}_{#1}\left[ \, #3 \, \vert \, #2 \, \right]}

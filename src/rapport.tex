@@ -1,4 +1,5 @@
 \documentclass[11pt]{report}
+
 % ⚠️ DO NOT TOUCH ————————————
 % * include and settings
 % ✏️ note : include should be used in document environment → use of input here
@@ -15,28 +16,25 @@
 % ⚙️ Table of Contents
 \dominitoc
 
+% * global commands
+% ⚙️ INCLUDE COMMAND
+\input{include/global_commands.tex}
+
 \begin{document}
-% ⚠️ DO NOT TOUCH ——————————————
-{
-    % * document environment commands
-    % ⚙️ INCLUDE COMMAND
-    \include{include/commands.tex}
-    % ⚙️ COURVERTURE 
-    \input{content/couverture/main.tex}
-    % \addtocontents{toc}{\protect\thispagestyle{empty}}
-    % \pagenumbering{gobble}
-    \pagenumbering{Roman}
-    % ⚙️ ABSTRACT
-    \include{content/abstract.tex}
-    % ⚙️ ToC
-    \tableofcontents
-    \pagebreak
-    \listoffigures
-    \listofalgorithms
-}
-% ⚠️ ———————————————————————————
+% ~ PRE CONTENT  ——————————————————————
+% > no page numbering
+% ⧐ couverture  [settings]
+% ⧐ abstract    [settings / abstract_text.tex]
+% ⧐ notations   [content/pre/main.tex]
+% > Roman page numbering
+% ⧐ Table of Contents
+% ⧐ Table of Figures
+% ⧐ Table of Algorithms
+\include{content/pre/main.tex}
+% ~ ———————————————————————————————————
 
 % ~ CONTENT ———————————————————————————
+% > arabic page numbering
 % $ CHAPTERS
 % * ————— CHAPTER 1 —————
 \include{content/chapter_1/main.tex}

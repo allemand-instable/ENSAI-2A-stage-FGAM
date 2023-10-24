@@ -2,6 +2,17 @@
 
 A simple LaTeX Template, with nice structure, and commands for ease of use
 
+## Requirements / Dependencies
+
+| software           | what for ?                                                        | installation link                                                        |
+| ------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| latexmk            | compile with complex options and watch for changes                | [official doc](https://mg.readthedocs.io/latexmk.html)                   |
+| zsh [for now]      | shell targeted for the scripts "compile", "clear_aux" and "watch" | [oh-my-zsh tuto](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH) |
+| latex              | seems obvious                                                     | [official doc](https://www.latex-project.org/get/)                       |
+| [linux] evince     | pdf viewer                                                        |                                                                          |
+| [macos] skim       | pdf viewer                                                        | [official website](https://skim-app.sourceforge.io/)                     |
+| [windows] gsview32 | pdf viewer                                                        |                                                                          |
+
 ## compiling and watching using `latexmk` :
 
 ➤ efficient way to compile and watch for changes in your LaTeX files
@@ -16,191 +27,107 @@ zsh compile.zsh
 zsh watch.zsh
 ```
 
-## render options :
+### flags
 
-### set the render option
-
-open `include/settings/render.tex` :
-
-```
-📦 LaTeX-Template
- ┣ 📂Images
- ┣ 📂bibliography
- ┣ 📂content
- ┣ 📂include
- ┃ ┣ 📂commands
- ┃ ┣ 📂definition
- ┃ ┣ 📂packages
- ┃ ┣ 📂settings
- ┃ ┃ ┣ 📜render.tex   <<<<<< [ that one ]
- ┃ ┃ ┗ 📜settings.tex
+```zsh
+zsh compile.zsh -d      # compiles documentation only
+zsh compile.zsh -r      # compiles report only
+zsh compile.zsh -t      # compiles tests only
+zsh compile.zsh -h      # flags help
+# —— Exclusive to compile ———
+zsh compile.zsh         # compile all files (doc/report/test)
 ```
 
-and then turn on or off with either `1` or `0` :
+The same applies to watch script
 
-```latex
-% ...
-% & value
-\setcounter{code}{1}  % render code blocks
-\setcounter{proof}{0} % do not render proofs
-% ...
-```
+### other shells
 
-### use in document :
+if you use another shell (bash/...) you might have to adapt the script [chatGPT if you are hurry] to the targeted shell.
 
-```latex
-\ifnum\value{proof}=1
-    \preuve{
-        ...
-    }
-\fi
+## project strcuture
 
 ```
-
-```latex
-\ifnum\value{code}=1
-    \begin{minted}
-        ...
-    \end{minted}
-\fi
+📦LaTeX-Template
+ ┣ 📂aux_files              ‹◀ latex compiling aux files (cache)
+ ┣ 📂doc                    ‹◀ github README
+ ┣ 📂out                    ‹◀ compiled files
+ ┃ ┣ 📜documentation.pdf
+ ┃ ┣ 📜rapport.pdf
+ ┃ ┣ 📜tests.pdf
+ ┣ 📂src                    ‹◀ actual project source code
+ ┣ 📜.latexmkrc             ‹◀ compile settings
+ ┣ 📜clear_aux.zsh
+ ┣ 📜compile.zsh
+ ┗ 📜watch.zsh
 ```
 
-## Custom commands :
+## documentation
 
-### Math Sets
+The documentation can be accessed easily in a pdf format at the location :
 
--   `\R` : ℝ
--   `\N` : ℕ
--   `\Z` : ℤ
--   `\Q` : ℚ
--   `\C` : ℂ
--   `\K` : 𝕂
--   `\F` : 𝔽
--   `\E` : 𝔼
--   `\P` : ℙ
-    ...
+```
+📦LaTeX-Template
+ ┣ 📂out                    ‹◀ compiled files
+ ┃ ┣ 📜documentation.pdf        ← formatted custom commands and settings documentation
+ ┃ ┣ 📜rapport.pdf
+ ┃ ┣ 📜tests.pdf
+```
 
-### definition
+If the user prefers in a markdown format : it can be found [here](./doc/doc.md) (📁 `doc/doc.md`)
 
--   `\famfinie[var] {from} {to}`
-    -   exemple : `\famfinie[k] x 1 M` : `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/famfinie.png"/>`
--   `<span>\statrang X N i` : `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/statrang.png"/>`
--   `\suitestatrang X 1 M` : `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/suitestatrang.png"/>`
+## testing
 
-### convergence :
+```
+📦LaTeX-Template
+ ┣ 📂out                    ‹◀ compiled files
+ ┃ ┣ 📜documentation.pdf
+ ┃ ┣ 📜rapport.pdf
+ ┃ ┣ 📜tests.pdf                ← testing commands and environments
+```
 
-usage : `\cmd [var] [where it tends to]`
+## Packages (todo):
 
--   `\cvl` : convergence en loi
--   `\cvp` : convergence en probabilité
--   `\cvps` : convergence presque sûre
--   `\cvL [nb]` : convergence dans 𝕃ᴾ
--   `\cvetr` : convergence étroite de mesure
--   `\cvnorme [norm sub symbol]` : convergence pour la norme spécifiée
+ <!-- TODO -->
 
-    -   `<span>`exemple : `\cvnorme \infty x 0` : `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/cvnorme.png"/>`
+The project `Latex-Template` relies on the following latex packages
 
--   `\cvpp [μ]` : convergence μ-presque partout
--   `\tendset`
-
-    -   `<span>`exemple : `\tendset x \infty A` `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/tendset.png"/>`
-
-### operators / functions / ... :
-
--   `\indicatrice [ensemble]`
-    -   `<span>` exemple : `\indicatrice {|f| < \alpha}` : `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/indicatrice.png"/>`
--   `\norme [norm sub symbol] [vector]`
--   `\distnorme [norm sub symbol] [vector 1] [vector 2]`
--   `\prodscal [vector 1] [vector 2]` : ⟨ x | y ⟩
--   `\prodscalselon [sub symbol] [vector 1] [vector 2]` :
-    -   `<span>`exemple : `\prodscalselon G x y` : `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/prodscalselon.png"/>`
--   `\arg(min/max)\limits_{ ... }`
-    -   `<span>` exemple : `\argmin\limits_{u \in \Delta} \| Y - X \beta \|` : `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/argmin.png"/>`
--   `\inverse [stuff]` : A⁻¹
--   `\isdef` : `<img style="width : 1em; vertical-align:middle" src="./desc_img/isdef.png"/>`
--   `\positive [stuff]` :
-    -   `<span>`exemple : `\positive{ x- \frac{\log u}{n - p + 1}}` `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/positive.png"/>`
-
-### probability :
-
--   `\petitop [of what]`
--   `\grandop [of what]`
--   `\proba [of what]` : ℙ[ ... ]
--   `\esperance [of what]` : 𝔼[ ... ]
--   `\variance [of what]` : 𝕍[ ... ]
--   `\esperanceloi [loi] [of what]`
-    -   exemple : `\esperanceloi {X|Y} {\frac{U_n}{\pi}}` : `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/esperanceloi.png"/>`
--   `\esperancesachant [of what] [condition]` : 𝔼[ ... | ... ]
--   `\esploisach [loi] [of what] [condition]` : 𝔼[ ... | ... ]
-    -   exemple : `\esploisach {X|Y} {\frac{U_n}{\pi}} {Y \leq 1}` : `<img style="height : 2.3em; vertical-align:middle" src="./desc_img/esploisach.png"/>`
-
-### generic
-
--   `\lorem` : lorem ipsum generic text
-
-### Theorems environments :
-
--   `\thm` : Théorème
--   `\prop` : Proposition
--   `\lem` : Lemme
--   `\cor` : Corollaire
--   `\exo` : Exercice
--   `\rem` : Remarque
-
-### custom colors :
-
-colors from [flat ui colors](https://flatuicolors.com/) have been added to the template :
-
-here are a few examples :
-
--   `flatuicolors_orange_light` : `<strong style="color : #f5cba7;">` #f5cba7 `</strong>`
--   `flatuicolors_orange` : `<strong style="color : #ff9f43;">` #ff9f43 `</strong>`
--   `flatuicolors_red_light` : `<strong style="color : #e66767;">` #e66767 `</strong>`
--   `flatuicolors_imperial` : `<strong style="color : #222f3e;">` #222f3e `</strong>`
--   `flatuicolors_aqua` : `<strong style="color : #01a3a4;">` #01a3a4 `</strong>`
-
-👀 all of them can be seen in the `include/definition/custom_colors.tex` file.
-
-## Packages :
-
--   inputenc
--   fontenc
--   graphicx
--   amsmath
--   amssymb
--   hyperref
--   dsfont
--   babel
--   url
--   pgfplots
--   stmaryrd
--   mathtools
-
-### fonts
-
--   avant
--   dsfont
--   fontawesome5
--   mfirstuc
-
-### others
-
--   float
--   mutlirow
--   geometry
--   tikz
--   framed
--   multicol
--   awesomebox
-
-### table of content
-
--   minitoc
-
-### display code withtsyntax highlight
-
--   minted
-
+| package      | used for                                             | `include/pacakges/` |
+| ------------ | ---------------------------------------------------- | ------------------- |
+| inputenc     | utf-8 input                                          |                     |
+| fontenc      | font encoding                                        |                     |
+| graphicx     | including images                                     |                     |
+| amsmath      | maths                                                |                     |
+| amssymb      | maths                                                |                     |
+| hyperref     | url links with custom text                           |                     |
+| dsfont       | double stroke : better than `\mathbb`                |                     |
+| babel        | french names for envs                                |                     |
+| url          | typesetting URLs                                     |                     |
+| pgfplots     | latex curve graphs                                   |                     |
+| stmaryrd     | symbols for computer science                         |                     |
+| mathtools    | convenient convergence arrows                        |                     |
+| —            | —                                                    | —                   |
+| avant        | font                                                 |                     |
+| fontawesome5 | icons [`\info` / `\warn` ...]                        |                     |
+| mfirstuc     | capitalizing the first letter of a word              |                     |
+| float        | improved interface for floating objects              |                     |
+| multirow     | table cells spanning multiple rows                   |                     |
+| awesomebox   | env with bar at the left [`\info` / `\warn` ...]     |                     |
+| minitoc      | table of content of the chapter                      |                     |
+| minted       | code highlight                                       |                     |
+| table        | tables                                               |                     |
+| xcdraw       | drawing tables with TikZ                             |                     |
+| xcolor       | custom colors                                        |                     |
+| array        | extending the array and tabular environments         |                     |
+| booktabs     | publication quality tables                           |                     |
+| tabularx     | beautiful tables with adjustable-width column        |                     |
+| algorithm2e  | algorithm environments                               |                     |
+| footmisc     | make sure footnotes are bellow                       |                     |
+| comment      | commenting out large blocks of code with env         |                     |
+| tikz         | creating graphics programmatically                   |                     |
+| tikz-cd      | creating commutative diagrams                        |                     |
+| framed       | framed or shaded regions that can break across pages |                     |
+| multicol     | typesetting documents with multiple columns          |                     |
+| changepage   | margin adjustment and detection of odd/even pages    |                     |
 ---
 
 ```zsh
