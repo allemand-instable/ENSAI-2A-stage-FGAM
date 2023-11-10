@@ -1,0 +1,53 @@
+{
+
+\question{ Comment estimer le modèle additif ? }
+
+\subsubsection{Formulation Gauss-Sneidel}
+    
+    Alors on peut ré-écrire le système d'équations conditionnelles comme un système d'équations linéaires :
+
+    \begin{equation}
+        \begin{cases}
+            m_1(X_1) + \mathit E_1 [m_2(X_2)] + \dots + \mathit E_1[m_d(X_d)]  &= \mathit E_1[Y] \\ 
+            \hspace{4cm} \vdots &  \hspace{0.8cm} \vdots \\
+            \mathit E_d [m_1(X_1)]  + \dots + \mathit E_d [m_{d-1}(X_{d-1})]  + m_d(X_d) &= \mathit E_d[Y]
+        \end{cases}\iff \boxed{\mathbf E \circ \grandM(X) = E \circ Y}
+    \end{equation}
+
+    avec la matrice $\mathbf E$, l'application $E$ et le vecteur $\grandM(X)$ définis par :
+
+    \begin{minipage}{0.33\textwidth}
+        \begin{equation}
+            \mathbf E =
+            \begin{bmatrix}
+                I           & \mathit E_1 & \dots  & \dots  & \mathit E_1 \\
+                \mathit E_2 & I           & E_2    & \dots  & \mathit E_2 \\
+                \mathit E_3 & \mathit E_3 & \ddots &        & \mathit E_3 \\
+                \vdots      & \vdots      &        & \ddots & \vdots      \\
+                \mathit E_d & \mathit E_d & \dots  & \dots  & I
+            \end{bmatrix}
+            \label{eq:gam-matrix-E}
+        \end{equation}
+    \end{minipage}
+    \begin{minipage}{0.35\textwidth}
+        \begin{equation}
+            E : \func{\VA{\grandR}}{\VA{\R d}}{Y}{\begin{bmatrix}
+                \mathit E_1[Y] \\
+                \vdots \\
+                \mathit E_d[Y]
+            \end{bmatrix}}
+        \end{equation}
+    \end{minipage}
+    \begin{minipage}{0.25\textwidth}
+        \begin{equation}
+            \grandM(X) =
+            \begin{bmatrix}
+                m_1(X_1) \\
+                m_2(X_2) \\
+                \vdots   \\
+                m_d(X_d)
+            \end{bmatrix}
+        \end{equation}
+    \end{minipage}
+
+}
