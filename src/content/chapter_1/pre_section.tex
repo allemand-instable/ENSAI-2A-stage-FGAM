@@ -1,0 +1,22 @@
+Le statisticien est amené la plus part de son temps à modéliser les données qu'il traîte afin de pouvoir fournir une analyse et pouvoir faire de la prédiction pour ses clients. Parmis les premiers modèles qu'il apprend à manipuler, se trouve la régression linéaire avec des erreurs gaussiennes en tant que bruit blanc :
+
+\begin{equation*}
+    y = \beta_0 + \sum_{k=1}^d \beta_k x_k = \varepsilon
+\end{equation*}
+
+On dit alors que l'on fait une modélisation \emph{paramétrique}. En effet on suppose en premier lieu (et donc on impose) que nos données suivent un lien ici linéaire avec les covariables. On caractérise ainsi la relation entre la réponse $Y$ et les covariables $X = \begin{bmatrix} X_1 & \cdots & X_d \end{bmatrix}$ par un nombre fini de paramètres : les $\famfinie \beta i 1 n$. De manière générale un modèle paramétrique est un modèle où $y = m_\theta(x) + \varepsilon$ et $m_\theta$ est une fonction de $x$ qui est caractérisée par $\theta \in \Theta$ où $\dim \Theta < \infty$.
+
+De manière générale, on voit un problème de régression comme la résolution du problème suivant :
+\begin{equation}
+    \hat m(x) = \argmin\limits_{m \in \mathcal F}\left[ \ d\bigl(y, m(x)\bigr) \ \right]
+\end{equation}
+
+où $\mathcal F$ est un espace de fonctions et $d$ une certaine métrique ou ce qu'on appelle en machine learning \og une fonction de coût \fg. Une régression à modèle paramétrique est donc le cas où $\mathcal F$ est un sous espace de fonctions de dimension finie : le problème devient :
+
+\begin{align}
+    \hat m(x) & = \argmin\limits_{m \in \mathcal F_\Theta}\left[ \ d\bigl(y, m(x)\bigr) \ \right]
+    \\
+    & =  \argmin\limits_{\theta \in \Theta}\left[ \ d\bigl(y, m_\theta(x)\bigr) \ \right]
+\end{align}
+
+Cette approche permet de modéliser de façon simple les données en obtenant des vitesses de convergence rapides \citationrequise. Mais cela est évidemment à condition que la modélisation paramétrique choisie ne soit pas trop éloignée du comportement du phénomène étudié, sinon quoi le modèle ferait des prédictions, certes, mais qui n'ont pas de sens vis à vis du phénomène étudié. C'est pourquoi il existe une branche de la méthodologie statistique appelée \og statistique non paramétrique \fg qui vise à imposer le moins de restrictions à $\mathcal F$.
