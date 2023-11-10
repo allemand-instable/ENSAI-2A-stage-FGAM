@@ -1,0 +1,35 @@
+\subsection*{Régression non paramétrique}
+
+La statistique non paramétrique permet de modéliser des phénomènes complexes, sans hypothèse a priori qui peut s'avérer coûteuse sur la loi du phénomène. 
+
+\subsection*{Le fléau de la dimension}
+
+Aussi générale soit-elle, toute modélisation vient avec son lot de \of trade-off \fg : la statistique non paramétrique est particulièrement sujet au fléau de la dimension. Si l'on souhaîte estimer une fonction $m \in \calC^k( \R d, \grandR )$, la statistique non paramétrique nous fournira un estimateur $\widehat m$ de $m$ tel que : 
+
+\begin{equation}
+    m(x) = \widehat m(x) + \grandop{ n^{- \frac 1 {2k + d}} }
+\end{equation}
+
+Afin d'obtenir une vitesse de convergence satisfaisante de l'estimateur, on peut soit disposer d'un très grand nombre d'observation, ou alors restreindre la dimension du problème (la classe de la fonction n'étant en général pas un paramètre sur lequel on dispose d'un contrôle).
+
+\question{ Jusqu'à combien de points que l'on observe est-il raisonnable de faire de la statistique non paramétrique sans contrainte sur la dimension ? }
+
+En effet, \editlater{citer Tsybakov} Pour pouvoir avoir une convergence de l'estimateur de la densité par méthode à noyau par exemple, il faut que l'on puisse observer autour du point lisser en dimension $d$ un nombre de points au moins supérieur à \editlater{se référer à tsybakov}. Hors, le volume de l'hyper-sphère de rayon $r$ en dimension $n$ est donné par :
+
+\begin{equation}
+    V_n(r) = \frac{\pi^{\frac n 2} \cdot r^{n}}{\Gamma(\frac n 2 + 1)} 
+    \underset{n \rightarrow \infty} {\searrow} 0
+\end{equation}
+
+\begin{equation}
+    V_n^{[cube]}(\ell) = \ell^n
+\end{equation}
+
+\editlater{ajouter une référence sur le calcul du volume de l'hyper-sphère : développement d'aggreg ?}
+
+Le célèbre paradoxe de James-Stein sur l'estimation jointe de moyennes selon le critère MSE est un exemple de technique pour combattre de fléau de la dimension : en contractant les points vers un point central, on peut améliorer la qualité de l'estimateur. 
+
+\begin{equation}
+    \widehat {\mu_d} = \left( 1 - \frac{d - 2}{\norme 2 {X}^2} \right) X
+\end{equation}
+
