@@ -1,24 +1,94 @@
 {
 
-\question{ Comment estimer le modèle additif ? }
+    % \question{ Comment estimer le modèle additif ? }
 
-\subsubsection{Formulation Gauss-Sneidel}
-    
-    Alors on peut ré-écrire le système d'équations conditionnelles comme un système d'équations linéaires :
+    \subsubsection{Les équations d'estimation conditionnelles}
+    {
+        Notre modèle d'observation est tel que l'on observe 
 
-    \begin{equation}
-        \begin{cases}
-            m_1(X_1) + \mathit E_1 [m_2(X_2)] + \dots + \mathit E_1[m_d(X_d)]  &= \mathit E_1[Y] \\ 
-            \hspace{4cm} \vdots &  \hspace{0.8cm} \vdots \\
-            \mathit E_d [m_1(X_1)]  + \dots + \mathit E_d [m_{d-1}(X_{d-1})]  + m_d(X_d) &= \mathit E_d[Y]
-        \end{cases}\iff \boxed{\mathbf E \circ \grandM(X) = E \circ Y}
-    \end{equation}
+        \begin{equation*}
+            \left(x_1^{[ \, i\, ]}, \dots, x_k^{[ \, i\, ]}, \dots, x_d^{[ \, i\, ]}, y^{[ \, i\, ]}\right) \underset{not.}{=} (x_k, y)^{[ \, i\, ]}_{k \in \intervaleint 1 d} \underset{not.}{=} O_i
+        \end{equation*}
 
-    avec la matrice $\mathbf E$, l'application $E$ et le vecteur $\grandM(X)$ définis par :
+        avec
 
-    \begin{minipage}{0.33\textwidth}
+        \begin{equation*}
+            y = m(x) + \varepsilon
+        \end{equation*}
+
+        en considérant l'hypothèse classique : $\esperancesachant X \varepsilon = 0$
+
         \begin{equation}
-            \mathbf E =
+            \esperancesachant {X} Y = m(X) = \sum_k m_k(X_k)
+        \end{equation}
+
+        on alors pour tout $k \in \intervaleint 1 d$ : 
+
+        \begin{align}
+            \esperancesachant{X_k} Y & = \esperancesachant{X_k}{m(X)}
+            \notag \\
+                                    & =\esperancesachant{X_k}{\sum_p m_p(X_p)}
+            \notag \\
+            \esperancesachant{X_k} Y & = m_k(X_k) + \sum_{p\neq k}\esperancesachant{X_k}{m(X_p)} \label{eq:eq_estim_cond_gam}
+        \end{align}
+    }
+    \subsubsection{Intuition : Formulation Gauss-Seidel}
+    {
+
+        \noindent On peut ré-écrire le système d'équations conditionnelles comme un système d'équations linéaires\cite{hastie1990generalized} :
+
+        \begin{equation}
+            \begin{cases}
+                m_1(X_1) + \mathit E_1 [m_2(X_2)] + \dots + \mathit E_1[m_d(X_d)]            & = \mathit E_1[Y]      \\
+                \hspace{4cm} \vdots                                                          & \hspace{0.8cm} \vdots \\
+                \mathit E_d [m_1(X_1)]  + \dots + \mathit E_d [m_{d-1}(X_{d-1})]  + m_d(X_d) & = \mathit E_d[Y]
+            \end{cases}
+            \iff \boxed{\mathbf E \circ \grandM(X) = E \circ Y}
+        \end{equation}
+
+        \bigskip
+
+        \noindent avec la matrice $\mathbf E$, l'application $E$ et le vecteur $\grandM(X)$ définis par :
+
+        \begin{minipage}{0.33\textwidth}
+            \begin{equation*}
+                \mathbf E =
+                \begin{bmatrix}
+                    I           & \mathit E_1 & \dots  & \dots  & \mathit E_1 \\
+                    \mathit E_2 & I           & E_2    & \dots  & \mathit E_2 \\
+                    \mathit E_3 & \mathit E_3 & \ddots &        & \mathit E_3 \\
+                    \vdots      & \vdots      &        & \ddots & \vdots      \\
+                    \mathit E_d & \mathit E_d & \dots  & \dots  & I
+                \end{bmatrix}
+                \label{eq:gam-matrix-E}
+            \end{equation*}
+        \end{minipage}
+        \begin{minipage}{0.35\textwidth}
+            \begin{equation*}
+                E : \func{\VA{\grandR}}{\VA{\R d}}{Y}{\begin{bmatrix}
+                    \mathit E_1[Y] \\
+                    \vdots \\
+                    \mathit E_d[Y]
+                \end{bmatrix}}
+            \end{equation*}
+        \end{minipage}
+        \begin{minipage}{0.25\textwidth}
+            \begin{equation*}
+                \grandM(X) =
+                \begin{bmatrix}
+                    m_1(X_1) \\
+                    m_2(X_2) \\
+                    \vdots   \\
+                    m_d(X_d)
+                \end{bmatrix}
+            \end{equation*}
+        \end{minipage}
+
+        \bigskip
+
+        On peut désormais décomposer le problème en deux parties et considérer une solution approximative que l'on vient mettre à jour en itérant plusieurs fois : il s'agit de la procédure de Gauss-Seidel :
+
+        \begin{equation*}\begin{array}{cl}
             \begin{bmatrix}
                 I           & \mathit E_1 & \dots  & \dots  & \mathit E_1 \\
                 \mathit E_2 & I           & E_2    & \dots  & \mathit E_2 \\
@@ -26,28 +96,232 @@
                 \vdots      & \vdots      &        & \ddots & \vdots      \\
                 \mathit E_d & \mathit E_d & \dots  & \dots  & I
             \end{bmatrix}
-            \label{eq:gam-matrix-E}
-        \end{equation}
-    \end{minipage}
-    \begin{minipage}{0.35\textwidth}
-        \begin{equation}
-            E : \func{\VA{\grandR}}{\VA{\R d}}{Y}{\begin{bmatrix}
-                \mathit E_1[Y] \\
-                \vdots \\
-                \mathit E_d[Y]
-            \end{bmatrix}}
-        \end{equation}
-    \end{minipage}
-    \begin{minipage}{0.25\textwidth}
-        \begin{equation}
-            \grandM(X) =
+            &
             \begin{bmatrix}
                 m_1(X_1) \\
                 m_2(X_2) \\
                 \vdots   \\
+                \vdots   \\
                 m_d(X_d)
             \end{bmatrix}
-        \end{equation}
-    \end{minipage}
+            =
+            \begin{bmatrix}
+                \mathit E_1[Y] \\
+                \\
+                \vdots         \\
+                \\
+                \mathit E_d[Y]
+            \end{bmatrix}
+            \\\\
+            \left(
+            \begin{bmatrix}
+                    \mathbf{I}     & \color {flatuicolors_light_gray} 0 & \color {flatuicolors_light_gray} \dots & \color {flatuicolors_light_gray} \dots & \color {flatuicolors_light_gray} 0      \\
+                    \mathbf{ E_2 } & \mathbf I                          & \color {flatuicolors_light_gray} 0     & \color {flatuicolors_light_gray} \dots & \color {flatuicolors_light_gray} 0      \\
+                    \mathbf{ E_3}  & \mathbf{ E_3}                      & \ddots                                 &                                        & \color {flatuicolors_light_gray} 0      \\
+                    \vdots         & \vdots                             &                                        & \ddots                                 & \color {flatuicolors_light_gray} \vdots \\
+                    \mathbf{ E_d}  & \mathbf{ E_d}                      & \dots                                  & \dots                                  & \mathbf I
+                \end{bmatrix}
+            +
+            \begin{bmatrix}
+                    \color {flatuicolors_light_gray} 0      & \mathbf {E_1}                           & \dots                                   & \dots                                   & \mathbf {E_1}                      \\
+                    \color {flatuicolors_light_gray} 0      & \color {flatuicolors_light_gray} 0      & \mathbf{E_2}                            & \dots                                   & \mathbf {E_2}                      \\
+                    \color {flatuicolors_light_gray} 0      & \color {flatuicolors_light_gray} 0      & \color {flatuicolors_light_gray} \ddots &                                         & \mathbf {E_3}                      \\
+                    \color {flatuicolors_light_gray} \vdots & \color {flatuicolors_light_gray} \vdots &                                         & \color {flatuicolors_light_gray} \ddots & \vdots                             \\
+                    \color {flatuicolors_light_gray} 0      & \color {flatuicolors_light_gray} 0      & \color {flatuicolors_light_gray} \dots  & \color {flatuicolors_light_gray} \dots  & \color {flatuicolors_light_gray} 0
+                \end{bmatrix}
+            \right)
+            &
+            \begin{bmatrix}
+                m_1(X_1) \\
+                m_2(X_2) \\
+                \vdots   \\
+                \vdots   \\
+                m_d(X_d)
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                \mathit E_1[Y] \\
+                \\
+                \vdots         \\
+                \\
+                \mathit E_d[Y]
+            \end{bmatrix}
+        \end{array}\end{equation*}
 
+        \begin{align}
+            (L + U) \circ \mathds M(X) &= E \circ Y
+            \\
+            L \circ \mathds M(X) &= E \circ Y - U \circ \mathds M(X) \notag
+        \end{align}
+        
+        
+
+        \idee{
+            l'idée \og Gauss-Seidel \fg est alors de pouvoir approcher la solution $\mathds M(X)$ de la façon suivante : 
+            \begin{equation}
+                \mathds M(X)^{(n+1)} = L^{-1} \left( E\circ Y - U \circ \mathds M(X)^{(n)} \right)
+            \end{equation}   
+        }
+        \warn{
+            Attention à la rigueur dans la formule présentée ici, avant de pouvoir tout formuler comme on en a l'habitude dans le cadre de matrices réelles, rappelons que ce qu'on a défini juste avant sont des matrices dont les éléments sont des opérateurs (car les lois de l'algèbre des matrices s'appliquent à la reformulation de notre problème). On se sert ici de la formule uniquement en guise d'outil de compréhension intuitive de l'algorithme de Backfitting, on ne prétend se servir autrement de cette formule.
+        }
+        Si l'on dispose d'un lissage linéaire : comme le lissage à noyaux de Nadaraya-Watson alors :
+
+        \begin{equation}\begin{array}{cccccl}
+            \mathds M(X)^{(n+1)} &= &L^{-1} [ &E\circ Y - &U \circ &\mathds M(X)^{(n)} \ ]
+            \\
+            \downarrow &  & \downarrow & \downarrow & \downarrow & \downarrow O_i \textsf{ observé}
+            \\
+            {\widehat{\mathds M}(x_{obs})}^{(n+1)} &= & {\widehat L_{[NW]}}^{-1} [ &\widehat E_{[NW]}\circ Y - &\widehat U_{[NW]} \circ &\widehat{\mathds M}(x_{obs})^{(n)} \ ]
+        \end{array}\end{equation}
+
+        où les espérances conditionnelles $\mathit E_k$ ont été remplacées par les lisseurs linéaires de Nadaraya-Watson et la variable aléatoire $X$ par ses réalisations observées : $x_{obs} = ( x^{[ \, i \, ]}_k : i \in \intervaleint 1 n, k \in \intervaleint 1 d)$.
+
+    }
+    \subsubsection{Algorithme du Backfitting}
+    {
+
+            L'algorithme du Backfitting est une méthode d'approximation de solution de système linéaire utilisé dans l'estimation des modèles additifs. Des équations conditionnelles d'estimation \eqref{eq:eq_estim_cond_gam}, on corrige itérativement une première \emph{grossière estimation} de la solution sur chaque composante que l'on utilise immédiatement pour estimer la composante suivante, motivé par la section précédente :
+
+            \begin{algorithm}[H]
+                \normalem
+                \caption{backfitting du modèle additif : estimation des fonctions $m_k$ du modèle $\esperancesachant {X=x} Y = m(x) = \sum_{k=1}^d m_k(x_k)$}\label{alg:backfitting} 
+                \KwData{
+                    observations : $O_i \isdef (x_k, y)^{[ \, i\, ]}_{k \in \intervaleint 1 d}$
+                }
+                \KwIn{
+                    Initial Guess : $\bigl(\forall k \in \intervaleint 1 d \bigr) \widehat m_k^{[ \, r \, ]} \quad \colorize[flatuicolors_corn_flower]{\underset{\textsf{default}}{=} 0}$
+
+                    tolérance pour la convergence : $\varepsilon$
+
+                    métrique d'évaluation de la différence entre deux fonctions pour les itérations : $d$ à valeurs dans $\Rplus$
+                }
+                \BlankLine
+                \KwResult{
+                    termes composant l'estimation de la fonction $m :x \mapsto\sum_k m_k(x_k)$ : $\forall k \in \intervaleint 1 d \quad \widehat m_k : \func{\grandR}{\grandR}{x_k}{\widehat m_k(x_k)}$ 
+                }
+                $r \gets 0$\;
+                \Comment*[l]{Jusqu'à la convergence : la différence entre deux étapes est faible}
+                \While{
+                    $d\bigl( \widehat m_k^{[\, r \,]}, \widehat m_k^{[\, r-1 \,]}\bigr) > \varepsilon$
+                }
+                {
+                    \For{$k \in \intervaleint 1 d$}
+                    {
+                        \Comment*[l]{1. Backfitting}
+                        
+                        $\widehat m_k^{[\,r\,]} \gets \operatorname{NW}\left( y_i - \left[ \sum\limits_{p < k} \widehat m_k^{[r]}(x_k^{[\,i\,]}) + \sum\limits_{p > k} \widehat m_k^{[r-1]}(x_k^{[\,i\,]}) \right] \, : \, i \in \intervaleint 1 n\right)$ \;
+                        \Comment*[l]{$\qquad m_k^{[r-1]}$ : vient juste d'être estimée}
+                        \Comment*[l]{$\qquad m_k^{[r-1]}$ : estimation pas encore executée}
+                        
+                        \Comment*[l]{2. Centrage pour l'identifiabilité}
+                        
+                        $\widehat m_k \gets \ x \mapsto \widehat m_k(x) - \frac 1 n \sum_{i=1}^n \widehat m_k\bigl(x_k^{[\,i\,]}\bigr)$ \;
+                    }
+                }
+                        
+            \end{algorithm}
+
+            \idee{
+                On recentre à chaque fois car pour avoir l'identifiabilité on a besoin que $\esperanceloi{p_k \cdot \lambda}{m_k(X_k)} = 0$, cependant en appliquant empiriquement l'algorithme itérativement, rien ne guarantit de garder les estimateurs centrés, c'est pourquoi on retire la moyenne empirique (qui est un estimateur de l'espérance) à chaque étape.
+            }
+
+            \question{ On sait désormais quel algorithme on souhaite utiliser pour estimer un modèle additif, comment peut-on être sûr que cet algorithme converge bien vers la solution que l'on espère approcher ? Étant donné que l'on traîte des observations aléatoires, l'algorithme converge-t-il toujours vers la solution que l'on souhaite ?}
+    }
+    
+    \subsubsection{Convergence de l'algorithme du Backfitting}
+    \label{sec:backfitting-convergence}
+    {
+        \info{L'ensemble de cette section se base sur l'article \og The existence and asymptotic properties of a backfitting projection algorithm under weak conditions\fg de Mammen, Linton et Nielson (1999), pour plus de détails on pourra se référer à \cite{mammen1999existence}}
+
+        L'algorithme de backfitting a été utilisé en pratique (\og avec succès \fg ~\cite{mammen1999existence}) avant même la preuve de garantie de convergence vers la quantité qui nous intéresse : la fonction de régression $m$. L'algorithme de Backfitting s'avère en partie compliqué pour la démonstration de convergence vers la solution souhaitée car il est par nature un algorithme itératif sur l'approximation précédente : 
+
+        \begin{equation}
+            \widehat m^{[\,r\,]} = T \left( \widehat m^{[\,r-1\,]} \right) = \cdots = T^r\left( \widehat m^{[\, 0 \,]}\right)
+        \end{equation}
+
+        \begin{center}
+        où $T$ est une itération de l'algorithme de Backfitting.
+        \end{center}
+
+        \bigskip
+
+        Il existe différentes stratégies pour prouver la convergence de tels algorithmes. Une des stratégies classiques pour ce genre d'algorithmes itératifs est de reformuler le problème en un problème du point fixe, c'est à dire trouver un opérateur $\tilde T = g(T)$ impliquant l'algorithme du Backfitting qui soit continu et contractant (i.e. $\opnorm{\tilde T} < 1$) qui convergerait alors vers la solution que l'on recherche.\footnote{on reste ici volontairement flou vis-à-vis de la norme considérée dont dépend évidemment la convergence de notre estimateur, nous y reviendrons plus loin.}
+
+        \bigskip
+
+        Enfin en tant que statisticien, on est intéressés par les propriétés asymptotiques d'un tel estimateur. Le point de vue proposé par Mammen, Linton et Nielson permet une interprétation géométrique de l'algorithme de Backfitting qui débloque à la fois la démonstration de la convergence et l'obtention des propriétés asymptotiques de la solution de l'algorithme du Backfitting. Nous allons exposer ici les grandes idées de ce point de vue et des résultats importants et du chemin menant à leur démonstration sans trop rentrer dans les détails pour rester concis. Le lecteur pourra toujours se référer à \cite{mammen1999existence} pour les démonstrations complètes.
+
+        \idee{
+            \yellowboxed{1. Estimation comme une projection dans un espace de fonctions}
+
+            Le point de vue proposé est de voir le modèle additif comme une projection de la fonction de régression $m$, élément d'un espace de fonction très général, sur le sous-espace des fonctions additives. Puis l'estimation d'une telle fonction additive est elle aussi obtenue comme projection sur un sous-espace que l'on qualifierait grossièrement de \og sous-espace empirique \fg. 
+            %Il s'agit de ce qu'on appelle en statistique de \og projection-pursuit \fg.
+            
+            \begin{tabularx}{0.87\textwidth}{XX}
+                \toprule
+                modèle & espace associé
+                \\
+                \midrule
+                $Y_i = m_i(X) + \varepsilon$ & $\mathcal F = \bigl\{ \, \left( f^{[\,i\,]} : \R d \rightarrow \grandR, \, i \in \intervaleint 1 n \right) \, \bigr\}$
+                \\\\
+                $Y = m(X) + \varepsilon$ & $\mathcal F_{\underset{\forall i}{loi}}= \mathcal F_{\indep i} = \left\{ (f^{[\,i\,]})_{1,n} : \R d \rightarrow \grandR : f^{[\,i\,]} \indep i \right\}$
+                \\\\
+                $Y_i = \sum_k m_{i,k}(X_k) + \varepsilon$ & $\mathcal F_{add} = \left\{ \left(f^{[\, i \,]} : \R d \rightarrow \grandR \right)_{1,n} \, : \, \forall i \in \intervaleint 1 n\right.$ \linebreak $\exists (g_{i,p})_{\intervaleint 1 n \times \intervaleint 1 d}$  tq  $\left.f^{[\,i\,]}(x) = \sum\limits_{p=1}^d g_{i,p}(x_p) \right\}$
+                \\\\
+                $Y = \sum_k m_k(X_k) + \varepsilon$ & $\mathcal F_{\underset{\indep i}{add}} = \mathcal F_{\indep i} \cap \mathcal F_{add}$
+                \\
+                \bottomrule
+    
+            \end{tabularx}
+        }
+            
+        \warn{Si l'idée de voir les différentes hypothèses du modèle et l'estimation comme des projections successives sur des sous-espaces, il ne s'agit pas de la projection de la géométrie usuelle de $\mathds L^2$ que l'on a l'habitude manipuler. Afin de pouvoir interpréter le modèle et l'estimation comme des projections, il y a besoin de considérer une géométrie particulière donnée par le produit scalaire suivant :}
+
+        
+        \begin{equation}
+            \textsf{en posant : }f_{add}^{[\textsf{local}]}(\,x \; | \; i \,) \isdef f^{[\,i\,]}_0(x) + \sum_{k=1}^d \colorize[flatuicolors_rose]{\underbracket{f^{[\, i \,]}_k(x)}_{\textsf{additif}}} \; \cdot \; \colorize[flatuicolors_blue_devil]{\underbracket{\frac{x_k - X^{[\, i \,]}_k}{h}}_{\textsf{local}}}
+        \end{equation}
+
+
+        \begin{equation}
+            \prodscalselon \cdot \cdot * : \func{ \left[\mathds L^2 \cap \mathcal F_{add}\right]^2 }{\grandR}{(f,g)}{
+                \displaystyle\int \frac 1 n 
+                \sum\limits_{i = 1}^{n} 
+                \left[
+                    f_{add}^{[\textsf{local}]}(\,x \; | \; i \,) 
+                    \cdot 
+                    g_{add}^{[\textsf{local}]}(\,x \; | \; i \,) 
+                    \cdot 
+                    \colorize[flatuicolors_blue_devil]{\underbracket{\prod\limits_{j=1}^d \frac{1}{h} K\left(\frac{X_j^{[\,i\,]} - x_j} h\right)}_{\textsf{local : dimension }  d}}
+                \right] 
+                d\lambda_d(x)
+            }
+        \end{equation}
+
+        avec la norme $\norme * \cdot$ qui lui est associée ( $\norme * f^2 = \prodscalselon f f *$ )
+
+
+        \idee{
+            La considération d'un tel produit scalaire provient de l'interprétation des observations comme des fonctions :
+
+            en observant $(X_k^{[\, i \,]}, Y^{[\, i \,]} : k \in \intervaleint 1 d , i \in \intervaleint 1 n)$, on peut voir $Y^{[\,i\,]}$ comme une fonction de $\R d$ dans $\grandR$, même si elle doit être constante.
+            
+            \begin{equation}
+                Y^{[\, i \,]} = \begin{bmatrix} \vdots \\ Y_k^{[\, i \,]} : \grandR \rightarrow \grandR \\ \vdots \end{bmatrix} = f^{[\, i \,]} = \begin{bmatrix} \vdots \\ Y_k^{[\, i \,]} : \grandR \rightarrow \grandR \\ \vdots \end{bmatrix}
+            \end{equation}
+        }
+        
+
+        \chk{
+            Ce que montre \cite{mammen1999existence}, c'est que l'algorithme du backfitting peut se ramener à un opérateur impliquant la projection sur les sous-espaces empiriques qui est \textbf{contractant} \emph{du point de vue de la norme opérateur induite par} $\norme * \cdot$. \; \footnotemark
+        
+            \bigskip
+
+            Alors, \textbf{à condition que $\mathbf{\int K d\lambda= 1}$} et sous hypothèses de dépendance faible\footnotemark \, et de régularité du noyau et de la fonction cible, l'estimation du modèle par l'algorithme du Backfitting est une projection au sens de la géométrie induite par $\prodscalselon \cdot \cdot *$, les projecteurs existent et sont bien définis. Les vitesses de convergence de dimension $1$ sont bien atteignables.
+        }
+    \footnotetext[2]{\faExclamationTriangle \; \textbf{simplification :} toujours par soucis de concision, \emph{seule l'idée générale est ici restituée}. C'est en réalité un peu plus compliqué : on montre dans un premier temps que l'opérateur travaillant sur les quantités que l'on souhaite estimer $T$ est contractant pour la norme $\norme * \cdot$ sur $\mathcal F_{add}$, puis on définit un opérateur \og empirique \fg travaillant sur les données que l'on manipule (en tant que praticien) $\widehat T$, enfin on montre que l'opérateur \og empirique \fg converge vers l'opérateur \og idéal \fg : $\opnorm{\widehat T - T}_{\mathds L( \hat p \,\cdot \,\lambda )} = o_P(1)$ pour en déduire que l'on contrôle la norme opérateur \og empirique \fg si l'on contrôle la norme opérateur \og idéale \fg. La probabilité que la solution du Backfitting s'écarte de la solution de notre problème statistique est alors pleinement contrôlée par le paramètre de contrôle de la norme opérateur de $T$ et $\widehat T$.}
+    \footnotetext[3]{La notion de dépendance faible utilisée est la notion dite de \og strong alpha-mixing \fg, on pourra se référer à \cite{bradley2005basic} pour une introduction au sujet. }
+    % TODO : annexe:indep-faible —> strongly alpha mixing
+    }
 }

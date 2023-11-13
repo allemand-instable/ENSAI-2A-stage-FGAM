@@ -1,0 +1,69 @@
+Nous possédons désormais tous les outils nécessaires pour résoudre le problème de déconvolution dans le cadre du modèle partiellement linéaire. 
+
+\begin{equation}
+    Y = \beta^T X + \sum_{k=1}^d m_k(Z_k) + \varepsilon\label{eq:partially_linear_model}
+\end{equation}
+
+On souhaite dans un premier temps estimer le paramètre $\beta$ et dans un second temps estimer les fonctions $m_k$. Pour cela on peut éliminer les fonctions $m_k$ en soustrayant à \eqref{eq:partially_linear_model} l'expression conditionnée selon $Z$ en se restrayant aux fonctions additives (on compose par \eqref{eq:partially_linear_model} par $P_{\mathds L^2 \cap \mathcal A} \circ \esperancesachant Z { \bullet }$) :
+
+\begin{equation}
+    \left( \, Y - \xi(Z) \, \right) = \beta^T \left( \, X - \eta(Z) \, \right) + \varepsilon
+\end{equation}
+
+\noindent Où $\quad\eta(Z) = P_{\mathds L^2 \cap \mathcal A} \circ \esperancesachant Z { X } = \sum_k \eta_k(Z_k)\quad$ et $\quad\xi(Z) = P_{\mathds L^2 \cap \mathcal A} \circ \esperancesachant Z { Y } = \sum_k \xi_k(Z_k)$ (ce qui permet de les estimer avec un algorithme de backfitting avec les outils de déconvolution précédents).
+
+\noindent Nous obtenons alors :
+
+\begin{equation}
+    \beta = 
+    {
+        \underbracket
+        {\esperance{ \left( \, X - \eta(Z) \, \right) \left( \, X - \eta(Z) \, \right)^T }} 
+        _{D}
+    }^{-1}
+    \underbracket[1pt][2.75mm]
+    {\esperance{ \left( \, X - \eta(Z) \, \right)  (Y - \xi(Z))}}
+    _{c}\label{eq:beta}
+\end{equation}
+
+\noindent Sauf que nous n'observons ni $X$ ni $Z$ mais $X^* = X+U$ et $Z^* = Z+V$. Regardons naïvement ce que donne $D$ et $c$ dans ce cas :
+
+\begin{align}
+    D^*_{| Z} &= \esperance{ \left( \, X^* - \eta(Z) \, \right) \left( \, X^* - \eta(Z) \, \right)^T } \\
+        &= \esperance{ \left( \, X + U - \eta(Z) \, \right) \left( \, X + U - \eta(Z) \, \right)^T } \\
+        &= \esperance{ \left( \, X - \eta(Z) \, \right) \left( \, X - \eta(Z) \, \right)^T } + \esperance{ U U^T } + \underbracket{\esperance{ \left( X - \eta(Z) \right)U^T + U\left( X - \eta(Z) \right)^T }}_{= 0 \textsf{ car U } \indep X,Z}\\
+        &= D + \Sigma_U 
+\end{align}
+
+\noindent On peut alors en déduire un estimateur de $\beta$ en utilisant la formule des probabilités totales $\esperance{ \dash } = \esperance{\esperancesachant Z \dash}$ que l'on peut estimer grâce aux outils de déconvolution développés précedemment et en utilisant la propriété de scoring non biaisé du noyau normalisé de déconvolution $\tilde K^\star$ \footnote{on pourra se rappeler l'expression \eqref{eq:scoring_non_biaise} de la section \ref{sec:deconvolution_kernel} : \nameref{sec:deconvolution_kernel}\linebreak $\esperancesachant{Z}{\tilde K_h(z - Z^*)} = K_h(z - Z)$ nous assure que l'estimation de $\esperancesachant Z {\hat \eta^\star(z^*)}$ nous donnera bien une estimation pas plus biaisée de $\eta(z)$ que $\hat \eta^{[oracle]}(z)$} :
+
+\begin{equation}
+    \begin{array}{rcl}
+    D &=& \esperance{ \esperancesachant Z { \left( \, X^* - \eta(Z) \, \right) \left( \, X^* - \eta(Z) \, \right)^T } -  \Sigma_U } \\
+        &\underset{ Z \sim p_Z\cdot\lambda_d}=& \displaystyle\int \esperancesachant {\colorize{Z}} { \left( \, X^* - \eta(z) \, \right) \left( \, X^* - \eta(z) \, \right)^T } -  \Sigma_U \, \colorize[flatuicolors_rose]{p_Z(z)} \, d\lambda_d(z) \\
+        \widehat D &=& \displaystyle\int \colorize[flatuicolors_rose]{\frac 1 n \sum_{i=1}^{n}} \left( \, \xei - \colorize{\hat \eta^\star}(z) \, \right) \left( \, \xei - \colorize{\hat \eta^\star}(z) \, \right)^T \colorize[flatuicolors_rose]{\prod_{k=1}^d \tilde K^\star_h(z_k, Z_k^{*\,[\,i\,]})} d\lambda_d(z) - \Sigma_U
+    \end{array}
+\end{equation}
+
+\noindent En procédant de la même manière pour $c$ on obtient :
+
+\begin{equation}
+    \widehat c = \displaystyle\int \colorize[flatuicolors_rose]{\frac 1 n \sum_{i=1}^{n}} \left( \, \xei - \colorize{\hat \eta^\star}(z) \, \right) \left( \, \yi - \colorize{\hat \xi^\star}(z) \, \right) \colorize[flatuicolors_rose]{\prod_{k=1}^d \tilde K^\star_h(z_k, Z_k^{*\,[\,i\,]})} d\lambda_d(z)
+\end{equation}
+
+On peut alors estimer $\beta$ par $\widehat \beta = \widehat D^{-1} \widehat c$. On peut alors estimer simplement les fonctions $m_k$ en utilisant un algorithme de backfitting avec les outils de déconvolution selon $Y - \widehat \beta ^T X = \sum_k m_k(Z_k) + \varepsilon'$.
+
+\chk{ L'estimation du modèle partiellement linéaire permet d'obtenir de meilleures propriétés asymptotiques que le modèle additif grâce à la vitesse de convergence de la partie paramétrique. On pourra se référer à \cite{han2018smooth} pour les détails. L'estimation du modèle partiellement linéaire lorsque les covariables sont contaminées a été permise par le noyau normalisé de déconvolution sous les conditions de contrôler le \og spectre \fg\footnotemark de la distribution de la contamination et la de connaître la variance de la contamination de la variable paramétrique.}
+\footnotetext{dans le sens de la transformée de Fourier}
+
+\subsection{Points clés}
+
+\begin{todolist}
+    \item La contamination additive indépendante des covariables résulte en une distribution sous forme de convolution
+    \item La convolution est une opération à la structure algébrique simple dans le domaine fréquentiel
+    \item[\checked] Pour se défaire de la contamination, on travaille donc dans le domaine fréquentiel par transformée de Fourier
+    \item Définir un noyau qui possède les propriétés pour déconvoluer la distribution contaminée et être compatible avec l'algorithmique de Backfitting n'est pas trivial
+    \item Une fois le noyau bien défini, on peut estimer le modèle partiellement linéaire contaminé en se ramenant systématiquement à $\esperancesachant Z \dash$ projeté sur $\mathds L^2 \cap \mathcal A$, que l'on sait désormais estimer 
+    \item[\checked] les vitesses de convergences pour la fenêtre de lissage optimale sont optimales pour les problèmes semi-paramétriques impliquant de la déconvolution
+    \item[\crossed] On dispose tout de même d'hypothèses de régularité $\mathcal C^2$ sur les fonctions $m_k$ et demande de pouvoir contrôler le spectre fréquentiel de la contamination (hypothèse dont je ne connais pas la force en pratique sur des données réelles) 
+\end{todolist}

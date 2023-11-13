@@ -1,15 +1,35 @@
 {
-    \subsection{Motivations}
+    % \subsection{Motivations}
     {
         \input{content/chapter_1/sections/02/gam-motivations.tex}
     }
-    \subsection{Introduction}
-    {
-        \input{content/chapter_1/sections/02/gam-introduction.tex}
-    }
+    % \subsection{Introduction}
+    % {
+    %     \input{content/chapter_1/sections/02/gam-introduction.tex}
+    % }
     \subsection{Estimation : Algorithme du Backfitting}
     {
         \input{content/chapter_1/sections/02/gam-backfitting.tex}
     }
-    \subsection{Points clés}
+    \subsection{Points clés}\label{sec:backfitting_key_points}
+
+    \begin{todolist}
+        \item Les \emph{modèles additifs} combattent le \emph{fléau de la dimension} qui touche en particulier les modèles non paramétriques en se ramenant à des \emph{vitesses de convergence de la dimension 1}
+        \item pour estimer les modèles additifs on peut utiliser \emph{l'algorithme du Backfitting} qui est un \emph{algorithme d'approximation de solution itératif}
+        \item On peut voir l'estimation comme une procédure de \emph{projection} sur un sous-espace de fonctions \textbf{selon une géométrie très particulière}
+        \item il convient de voir alors nos données, elles aussi, comme des fonctions même si constantes
+        \item \longrigharrow on adapte la géométrie de l'espace au problème
+        \item la convergence d'algorithmes itératifs peut se démontrer au moyen d'un théorème du point fixe
+    \end{todolist}
+
+    \warn{
+        L'utilisation d'estimateurs à noyaux indique bien que parmis les hypothèses importantes de la méthodologie utilisée par Mammen, Linton et Nielson figure l'admission d'une loi à densité pour les covariables : on travaille avec les géométries de $\mathds L^2(p_X \cdot \lambda), \mathds L^2(\widehat p_X \cdot \lambda)$\ldots
+
+        \smallskip
+
+        Si cela ne semble pas être une hypothèse coûteuse dans le cadre des données réelles que l'on observe au quotidien, cela risque de poser problème dans le cadre de lois pour des objets en dimension infinie (comme les données fonctionnelles) comme il sera traîté au chapitre \ref{chap:additif_fda} \og\nameref{chap:additif_fda}\fg. 
+    }
+
+    Il est à noter que le point de vue de \og projections successives \fg de l'algorithme du Backfitting n'est pas simplement une interprétation esthétique de l'algorithme, elle est à ce jour \textbf{la} méthode qui permet d'obtenir les résultats de convergence souhaitables de cet algorithme. C'est pourquoi il est important lorsque l'on applique l'algorithme du Backfitting de vérifier les hypothèses qui permettent d'avoir le point de vue \og projection \fg. Cela constitue d'ailleurs une difficulté qui devra être surmontée pour l'estimation de données imparfaites, que nous allons détailler désormais.
+    
 }

@@ -1,0 +1,47 @@
+{
+    Les difficultés concernant la généralisation des concepts statistiques aux données fonctionnelles ayant été mentionnées dans la section précédente, nous nous focaliserons dans cette section à une revue rapide de la méthodologie proposée en partie par J.M. Jeon et B.U. Park concernant le problème de la régression non paramétrique du modèle additifs  dans un espace de Banach général.
+
+    % \subsection{Régression non paramétrique du modèle additif}
+    \bigskip\bigskip
+
+    La méthodologie utilisée pour l'estimation non paramétrique du modèle additif est sensiblement identique à celle proposée par Mammen (1999) \cite{mammen1999existence}. Un des apports des auteurs est l'estimation en pratique de l'algorithme du Backfitting basé sur l'intégrale de Böchner dont on rapelle que les lois de composition peuvent être définies de façon non canoniques. L'idée est de ramener l'estimation au monde des réels (que l'on remarque être un thème récurrent dans la méthodologie liée aux données fonctionnelles) en se déplaçant le problème des fonctions aux poids du lissage à noyau. Cela est permis par le fait que :
+
+    \begin{equation}
+        \forall b \in \mathds B \quad \boch f(u) \odot b \, d\mu(u) = \leb f(u) \, d\mu(u) \odot b
+    \end{equation}
+
+    Mettre à jour les fonction $\widehat m_k^{[NW | BF]}$ revient à mettre à jours les poids du lissage à noyau $\widehat w_{k,i}^{[NW | BF]} \ \forall i \in \intervaleint 1 n$ qui sont des réels.
+
+    \bigskip
+
+    En ce qui concerne la convergence de l'algorithme du Backfitting, les auteurs suivent la méthodologie de Mammen (1999) \cite{mammen1999existence} en définissant les mêmes types d'espaces, et considérant des opérateurs de projection. Notons ici les différences notables avec les travaux de Mammen (1999) \cite{mammen1999existence} :
+
+    La méthodologie des projecteurs sur les sous espaces additifs comme définis dans Mammen (1999) fonctionne pour les (sous-)espaces de Hilbert de dimension finie. En revanche dans le cadre de la dimension infinie, utiliser la projection orthogonale sur un sous-espace vectoriel fermé devient plus compliqué. La différence est qu'en dimension infinie les projecteurs comme comme définis dans Mammen (1999) ne sont plus des opérateurs compacts\footnote{Un opérateur est dit compact si il envoie toute partie bornée sur une partie d'adhérence compacte pour la topologie induite par la norme}. C'est un problème majeur puisque dans l'algorithme du Backfitting, pour estimer $m = \sum_k m_k$ on doit estimer les fonctions $m_k$ 1 par 1. 
+    
+    \noindent À chaque itération $r$ de notre algorithme du Backfitting $T$ nous nous retrouvons face à la situation : 
+    
+    \begin{equation*}
+        \widehat m^{[r]} = \sum_{k=1}^p \widehat m_k^{[r]} + \sum_{k=p+1}^d \widehat m_k^{[r-1]}
+    \end{equation*}
+
+    \noindent En notant $\mathcal M_k = \left\{ m \in \mathcal A : m = m_k \textsf{ avec } m_k \in \mathds L^2(p_k \cdot \lambda) \right\}$, on doit donc vérifier que pour tout $p \leq d$ l'espace $\sum_{k\leq p} \mathcal M_k$ est un fermé pour pouvoir appliquer le théorème de projection orthogonale sur un sous-espace vectoriel fermé. On peut alors estimer une composante après l'autre avec le point de vue de projection (qui pour rappel est essentiel à l'étude de la convergence). La compacité des projecteurs permet d'affirmer que la somme des sous espaces est elle aussi un sous espace vectoriel fermé. On ne peut donc plus invoquer cet argument en dimension infinie il faut donc trouver une autre méthode pour montrer que la somme des sous espaces est fermée.
+
+    \bigskip
+
+    \noindent Les auteurs contournent cette difficulté en montrant que les espaces $\sum_{k\leq p} \mathcal M_k$ sont fermés sans avoir à invoquer un argument de compacité des projections, et en utilisant le lemme suivant, plus particulièrement (3) :
+
+    \begin{lem*}[Lemme S.7 \cite{jeon2020additive}]
+        soit $\mathds H$ de Hilbert et $\mathcal M_1, \dots, \mathcal M_d$ des sous-espaces vectoriels fermés de $\mathds H$.
+        Sont équivalents :
+        \begin{enumerate}
+            \item $\sum\limits_{k\leq p} \mathcal \mathds H_k$ est un sous-espace vectoriel fermé de $\mathds H$
+            \item $\displaystyle\norme{\matcal L( \overline{\sum\limits_{k\leq p} \mathcal \mathds H_k})} {\underset{k\leq p}\circ(I-P_k)} < 1$
+            \item $\exists c > 0 \quad \forall h \in \mathds H \quad h = \sum_k h_k$ avec $h \in \mathds H_k$ et $\sum_k \lVert h_k \rVert^2 \leq c \lVert h \rVert^2$
+        \end{enumerate}
+    \end{lem*}
+
+
+
+
+    % \subsection{Covariables imparfaitement observées}
+}

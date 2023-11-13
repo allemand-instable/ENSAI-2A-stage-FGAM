@@ -1,39 +1,128 @@
+\section*{Notations}\label{notations}
 \begin{tabularx}{\linewidth}{lX}
 	\toprule
-	\textbf{Notation}  & \textbf{Signification} \\
-	%
+	\textbf{Notation}                                                                & \textbf{Signification}                                                                                                                                                                                                                              \\
+	% ————————————————————————————————————————————
 	\midrule
-	\textbf{Probabilités} &                        \\
+	\textbf{Probabilités}                                                            &                                                                                                                                                                                                                                                     \\
+	\midrule
+	$\leb$ ou $\displaystyle\int$                                                    & Intégrale de Lebesgue                                                                                                                                                                                                                               \\
+	$\boch$                                                                          & Intégrale de Böchner                                                                                                                                                                                                                                \\
+	$p \, \cdot \, \mu$                                                              & mesure $p$ à densité par rapport à la mesure $\mu$                                                                                                                                                                                                  \\
+	% ————————————————————————————————————————————
+	\midrule
+	\textbf{Statistiques}                                                            &                                                                                                                                                                                                                                                     \\
+	\midrule
+	$\VA{E}$                                                                         & ensemble des Variables Aléatoires à valeurs dans un ensemble $E$ : applications mesurables $(\Omega, \calF, \P) \rightarrow E$                                                                                                                      \\
+	$X$                                                                              & Variable Aléatoire                                                                                                                                                                                                                                  \\
+	$\widehat{X}$                                                                    & Quantité empirique                                                                                                                                                                                                                                  \\
+	$\widetilde{X}$                                                                  & Quantité intangible (\og unfeasible \fg dans la littérature)                                                                                                                                                                                        \\
+	$\overline{X}$                                                                   & Moyenne empirique                                                                                                                                                                                                                                   \\
+	$X_d^{[ \, i \,]}$                                                               & $d^{eme}$ composante de l'observation $i$ de la variable aléatoire multivariée $X$                                                                                                                                                                  \\
+	$X^*$ & Covariable contaminée par une erreur additive indépendante $X^* = X + U$\\
+	$x$                                                                              & Réalisation de la variable aléatoire $X$ : $x = X(\omega)$ pour un certain $\omega \in \Omega$                                                                                                                                                      \\
+	% ————————————————————————————————————————————
+	\midrule
+	\textbf{Algèbre Linéaire}                                                        &                                                                                                                                                                                                                                                     \\
+	\midrule
+	$\mathit{E_k}$                                                                   & Opérateur d'espérance conditionnelle selon la composante $k$ : $$\mathit E_k : \func{\VA{E^d}}{\VA{E}}{g(X)}{\esperancesachant{X_k}{g(X)}}$$                                                                                                        \\
+	$\mathbf E$ $\left(\underset {\textsf{\faExclamationTriangle}} {\neq} \E\right)$ & Matrice du système d'équation conditionné du modèle additif: $cf$ \ref{eq:gam-matrix-E}                                                                                                                                                             \\
+	$\lVert \cdot \rVert_{\mathds L^2}$                                              & Norme de $\mathds L^2$ issue du produit scalaire $\langle f \vert g \rangle_{\mathds L^2} = \int fg \ d\lambda$                                                                                                                                     \\
+	% ————————————————————————————————————————————
+	\midrule
+	\textbf{Ensembles}                                                               &                                                                                                                                                                                                                                                     \\
+	\midrule
+	$\mathcal C^k(E, F)$                                                             & Fonctions de classe $k$ de $E$ dans $F$                                                                                                                                                                                                             \\
+	$\mathcal A$ & Fonctions \og additives \fg : $f : \R d \rightarrow \grandR$ telles que $\exists \left( f_k : \grandR \rightarrow \grandR \right)_{1,d}$ et $f(x) = \sum_{k=1}^d f_k(x_k) \quad \forall x=(x_k)_{1,d} \in \R d$\\
+	$\mathds L^2(\mu)$ & Ensemble quotient des classes de fonctions de carré $\mu$-Lebesgue-intégrable pour la relation d'équivalence d'égalité $\mu$ presque partout : le $\mu$ est omis lorsque sans ambiguïté\\
+	$\mathds B(\mu)$ & Fonctions Böchner-$\mu$-intégrables \hspace{2cm} contexte : Données Fonctionnelles \\
+	% ————————————————————————————————————————————
+	\midrule
+	\textbf{Analyse}                                                                 &                                                                                                                                                                                                                                                     \\
+	\midrule
+	$D^\alpha$                                                                       & Dérivée multivariée : $D : \func{\grandN^d \times \mathcal C^{\max\limits_i \alpha_i}(\R d, \grandR)}{\mathcal C^{[\alpha]}(\R d, \grandR)}{\famfinie \alpha 1 d \ , \ f}{\displaystyle\frac{\partial^{\sum_i \alpha_i}}{\partial^{\alpha_1}x_1 \, \cdots \, \partial^{\alpha_d}x_d}f}$ \\
+	$[ \, \alpha \, ]$                                                               & Ordre de dérivation : $\sum_i \alpha_i$                                                                                                                                                                                                             \\\\
+	$[\, \alpha \,]^{max}$                                                           & ordre maximal de dérivation d'un opérateur étant combinaison linéaire d'opérateurs de différentiation multivariée : $\max\{ \alpha_k : \textsf{où } T = \sum_k c_k D^{\alpha_k} \}$ lorsque l'on souhaite estimer $T(m)$                            \\
+	\bottomrule
+\end{tabularx}
+
+\pagebreak
+
+\begin{tabularx}{\linewidth}{lX}
+	\toprule
+	\textbf{Notation} & \textbf{Signification}                                                                                                                                                                                   \\
+	% ————————————————————————————————————————————
+	\midrule
+	\textbf{Transformée de Fourier} & \\
+	\midrule
+	$\mathcal F$ & Opérateur de transformée de Fourier : $\mathcal F : \func{\mathds L^1}{\mathds L^1}{f}{\omega \mapsto \int e^{-i \omega x} f(x) dx}$ \\
+	$\mathcal F^{-1}$ & Opérateur de transformée de Fourier inverse : \linebreak $\mathcal F^{-1} : \func{\mathds L^1}{\mathds L^1}{f}{\omega \mapsto \frac 1 {2\pi}\int e^{+i \omega x} f(x) dx}$ \\
+	$\mathcal F_{\textsf{stat}}$ & Opérateur de transformée de Fourier \og statistique \fg : \linebreak $$\mathcal F_{\textsf{stat}} : \func{\mathds L^1}{\mathds L^1}{f}{\omega \mapsto \int e^{+i \omega x} f(x) dx} \overset{\textsf{not.}}{=} \phi_f$$ \\
+	$\phi_X$ & Fonction caractéristique de la variable aléatoire $X$ : \linebreak $$\phi_X : \func{\grandR}{\mathds C}{\omega}{\esperance{e^{i \omega X}}}$$ \\
+	$\phi_{\textsf{erreur}}$ & Fonction caractéristique de l'erreur de mesure $U$ aussi appelée $\phi_u$ quand il n'y a pas d'ambiguïté
+	\\
+	\midrule
+	\textbf{Noyaux}
+	                  &
+	\\
+	\midrule
+	$K$
+	                  & Noyau de lissage : $K : \func{\grandR}{\Rplus}{x}{\omega(x)\indicatrice{[-1,1]}}$
+	\\\\
+	\midrule
+	\\
+	$K_h$
+	                  & Noyau de lissage fenêtré : $K_h : \func{\grandR}{\Rplus}{x}{\frac 1 h K\left( \frac{x}{h} \right)}$
+	\\\\
+	$K_h^{[\,x_0\,]}$
+	                  & Noyau de lissage fenêtré centré en $x_0$ : $K_h^{[\,x_0\,]} : \func{\grandR}{\Rplus}{x}{\frac 1 h K\left( \frac{x-x_0}{h} \right) = K_h(x-x_0)}$
+	\\\\
+	$K_{h,\, \Vert \,  \cdot \, \Vert}^{[\,x_0\,]}$
+	                  & Noyau de lissage normalisé fenêtré centré en $x_0$ : $K_{h,\, \Vert \,  \cdot \, \Vert}^{[\,x_0\,]} : \func{\grandR}{\Rplus}{x}{\frac{K_h^{[\,x_0\,]}(x)}{\int K_h^{[\,x_0\,]}(u) du}}$
+	\\
+	\midrule
+	\\
+	$\tilde K_h$
+	                  & Noyau de déconvolution basé sur le noyau de lissage $K$ : \linebreak $$\tilde K_h : \func{\grandR}{\Rplus}{t}{\displaystyle\frac 1 {2\pi} \int e^{-iut} \frac{\mathcal F_{\textsf{stat}}[K](hu)}{\phi_{\textsf{erreur}}(u)} du} $$
+	\\\\
+	$\tilde K_h^\star$ 
+	                  & Noyau de déconvolution normalisé basé sur le noyau de lissage $K$ :\linebreak $$\tilde K_h^\star : \func{\grandR}{\Rplus}{t}{\displaystyle\frac{1}{2\pi h}\int e^{-i\omega \frac{x-X^*}{h}} \cdot \frac{\phi_{K, \, \Vert \, \cdot \, \Vert}^{[\,x\,]}(\omega \,;\, h)\phi_K(\omega)}{\phi_u\left(\frac \omega h\right)}}$$ 
+	\\
+	\bottomrule
+\end{tabularx}
+
+\pagebreak
+
+\begin{tabularx}{\linewidth}{lX}
+	\toprule
+	\textbf{Notation} & \textbf{Signification}                                                                                                                                                                                   \\
+	% ————————————————————————————————————————————
+	\midrule
+	\textbf{Estimation} & \\
 	\midrule
 
-	$\leb$ ou $\displaystyle\int$ & Intégrale de Lebesgue \\
-	$\boch$ & Intégrale de Böchner \\
-
-    \midrule
-	\textbf{Statistiques} &                        \\
+	$X$ & Covariable assignée à la partie paramétrique du modèle \\
+	$Z$ & Covariable assignée à la partie non paramétrique du modèle \\
 	\midrule
-
-	$\VA{E}$ & ensemble des Variables Aléatoires à valeurs dans un ensemble $E$ : applications mesurables $(\Omega, \calF, \P) \rightarrow E$ \\
-
-	$X$ & Variable Aléatoire\\
-	$\widehat{X}$ & Quantité empirique \\
-	$\widetilde{X}$ & Quantité intangible (\og unfeasible \fg dans la littérature)\\
-	$\overline{X}$ & Moyenne empirique\\
-	$X_d^{[ \, i \,]}$ & $d^{eme}$ composante de l'observation $i$ de la variable aléatoire multivariée $X$\\
-
-
-
+	$O_i$ & Observation de l'individu $i$ : $O_i = (X^{*[i]}, Z^{*[i]}, Y^{[i]})$ \\
+	$O$ & Ensemble des observations : $O = \{O_i\}_{1,n}$ \\
+	$O_i^{[\textsf{ideal}]}$ & Observation idéale de l'individu $i$ : $O_i^{[\textsf{ideal}]} = (X^{[i]}, Z^{[i]}, Y^{[i]})$ \\
 	\midrule
-	\textbf{Algèbre Linéaire} &                        \\
+	$\varepsilon$ & Erreur de mesure indépendante des données \\
 	\midrule
-
-	$\mathit{E_k}$ & Opérateur d'espérance conditionnelle selon la composante $k$ : $$\mathit E_k : \func{\VA{E^d}}{\VA{E}}{g(X)}{\esperancesachant{X_k}{g(X)}}$$ \\
-	% TODO : ajouter ref
-	$\mathbf E$ $\left(\underset {\textsf{\faExclamationTriangle}} {\neq} \E\right)$& Matrice du système d'équation conditionné du modèle additif ($cf$ \ref{eq:gam-matrix-E} )\\
-
-
-
+	$\eta$ & Conditionnement de $X$ par $Z$ projeté sur l'espace des fonctions additives $\mathcal A$ : \linebreak $\eta(z) = P_{\mathds L^2 \cap \mathcal A} \circ \esperancesachant {Z=z} {X}$\\
+	$\widehat \eta^\star$ & Estimation de $\eta$ par la méthode de déconvolution utilisant le noyau $\tilde K_h^\star$ \\
 	\midrule
-	\textbf{Ensembles} &                        \\
+	$\xi$ & Conditionnement de $Y$ par $Z$ projeté sur l'espace des fonctions additives $\mathcal A$ : \linebreak $\xi(z) = P_{\mathds L^2 \cap \mathcal A} \circ \esperancesachant {Z=z} {Y}$\\
+	$\widehat \xi^\star$ & Estimation de $\xi$ par la méthode de déconvolution utilisant le noyau $\tilde K_h^\star$ \\
 	\midrule
+	$\mathds B$ & Biais  \hspace{9cm}{contexte : estimation dans $\grandR$}\\
+	$\mathds B(\widehat p)$ & Biais de l'estimateur $\widehat p$ \hspace{5.8cm}{contexte : estimation dans $\grandR$}\\
+	\midrule
+	\textbf{Autres} & \\
+	\midule
+
+	$\mathds P_X$ & Loi image réciproque d'une variable aléatoire $X : (\Omega, \mathcal F , \mathds P) \rightarrow (\mathds X, \mathcal X, \mu)$ définie comme $\mathds P_X :\func {\mathcal X}{\Rplus} {x}  {\mathds P[ \inverse X(x)]}$ \\
+
+	\bottomrule
 \end{tabularx}

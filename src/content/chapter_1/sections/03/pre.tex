@@ -1,0 +1,73 @@
+On dispose du modèle semi-paramétrique des données suivant :
+
+\begin{equation}
+	\displaystyle
+	y = \sum\limits_{k=1}^d \beta_k \cdot x_k + m(z) \, + \varepsilon
+\end{equation}
+
+Il s'agit du modèle \og partiellement linéaire \fg, où les résidus de ce qui peut être modélisé par une partie paramétrique linéaire sont déterminés non paramétriquement afin de bénéficier au maximum des vitesses de convergence du paramétrique tout en gardant une partie de la flexibilité sur le modèle offerte par le non paramétrique.
+
+\idee{
+L'idée c'est que si l'on dispose de covariables $X = ( \underbracket{X_1, \dots, X_k}_{X_{lin}}, \underbracket{X_{k+1}, \dots, X_d}_{X_{\neg lin}})$ alors au lieu d'estimer :
+
+\begin{equation*}
+	\widehat m(X) = m(X) + \grandop{ n^{-\frac k {2k + d}}}
+\end{equation*}
+
+On estime le modèle :
+
+\begin{equation*}
+	m(X) = X_{lin}^T \, \beta + g(X_{\neg lin})
+\end{equation*}
+
+Ce qui nous permet ainsi d'obtenir les vitesses de convergence suivantes :
+
+\begin{equation*}
+	\begin{array}{rcl}
+		\widehat m(X) & = & X_{lin}^T \, \widehat \beta + \grandop{ n^{-1/2}} + \widehat g(X_{\neg lin}) + \grandop{ n^{-\frac k {2k + (d-k)}} }
+		\\
+		              & = & m(X) + \grandop{\underbracket{n^{-\frac k {2k + (d-k)}}}_{\textsf{pire vitesse}}}
+	\end{array}
+\end{equation*}
+
+Limitant ainsi l'exposition au fléau de la dimension.
+}
+
+Comme mentionné précédemment, pour limiter notre exposition au fléau de la dimension dû à la partie non paramétrique du modèle, on rajoute l'hypothèse d'additivité de la partie non paramétrique :
+
+\begin{equation}
+	\displaystyle
+	y = \sum\limits_{k=1}^d \beta_k \cdot x_k + \sum\limits_{k=1}^d m_k(z_k) \, + \varepsilon
+\end{equation}
+
+Idéalement, un statisticien travaille sur les observations suivantes :
+
+\begin{align}
+	               & O^{[ideal]} = \famfinie {O^{[ideal]}} 1 n
+	\notag
+	\\
+	\textsf{avec } & O_i^{[ideal]} = \bigl( \, \dash x_k^{[i]} \dash, \, \dash z_k^{[i]} \dash, \, y^{[i]} \, \bigr)
+\end{align}
+
+Malheureusement il est fréquent que les covariables utilisées pour la régression soient elles-mêmes bruitées en tant que données provenant de capteur, ou recensées, sondées par un humain, ... Ce que le praticien observe en réalité est plutôt de la forme :
+
+\begin{align}
+	               & O = \famfinie O 1 n
+	\notag
+	\\
+	\textsf{avec } & O_i = \bigl( \, \dash (x_k^{[i]} + u^{[i]}_k) \dash, \, \dash (z_k^{[\,i\,]} + v_k^{[\,i\,]}) \dash, \, y^{[\,i\,]} \, \bigr)
+	\\
+	\notag
+	\\
+	\textsf{où }   & u_k \indep x_k (\textsf{ et } v_k, z_k, \dots) \qquad v_k \indep z_k \, (\textsf{ et } u_k, x_k, \dots)
+	\notag
+	\\
+	               & \textsf{sont des erreurs liées à l'observation (gaussiennes par exemple)}
+	\notag
+\end{align}
+
+
+\noindent Cela complique considérablement l'estimation : que ce soit pour le paramètre $\beta$ ou les fonctions $m_k$.
+
+\smallskip
+

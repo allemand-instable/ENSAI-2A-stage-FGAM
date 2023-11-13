@@ -1,0 +1,54 @@
+Pour comprendre d'où viennent les difficultés introduites, considérons la méthode classique pour estimer ce modèle :
+il suffit d'estimer la partie non paramétrique en premier en effectuant l'algorithme du Backfitting\footnote{$cf$ algorithme \ref{alg:backfitting}}, puis effectuer une régression linéaire classique par moindres carrés sur les résidus obtenus.\footnote{Pour plus de détails, on pourra se référer à l'annexe \ref{annexe:regression-sur-residus-non-param}.}
+Ne pas prendre en compte les erreurs des covariables introduit du biais et rompt la consistance de l'estimateur car les $\zi$ ne sont pas observés, on observe avec erreur.
+On doit donc procéder à ce que l'on appelle une \og déconvolution \fg des termes d'erreur.\footnote{On pourra se référer à l'annexe \ref{}}
+
+%TODO : annexe qui explique pourquoi on introduit du biais
+
+}
+\subsection{Introduction}
+
+\begin{equation}
+	\varphi_X : \omega \mapsto \esperance{ e^{i \omega X}}
+\end{equation}
+
+Dans le cadre des lois à densité par rapport à la mesure de lebesgue (ce qui est notre cas ici) :
+
+\begin{equation}
+	\varphi_X(\omega) = \int e^{(i \omega) u} f_X(u) du = \mathcal F \bigl[ f_X \bigr](-\omega)
+\end{equation}
+
+La fonction caractéristique d'une loi est donc en quelque sorte le point de vue fréquentiel de la loi. Cette interprétation est particulièrement utile lorsque l'on remet en perspective notre objectif : nous disposons d'erreur additives indépendantes des données dans les covariables. L'indépendance fournit une symétrie dans la loi de la somme qui résulte dans le cadre des lois à densité en un produit de convolution :
+
+\begin{equation}
+	f_{X+U} = \convo {f_X} {f_U}
+\end{equation}
+
+La convolution de fonctions intégrables est une opération qui a été étudiée massivement dû à ses nombreuses applications. Elle se comporte algébriquement bien dans le monde fréquentiel : en effet la transformée de Fourier d'une convolution et le produit des transformées de Fourier
+
+\begin{equation}
+	\mathcal F \convo f g = \mathcal F[f] \times \mathcal F [g]
+\end{equation}
+
+Dans le cadre de nos erreurs dans les covariables, on se retrouve avec la loi des données observées que le peut comparer à la loi des données qui nous intéressent :
+
+\begin{align}
+	O_i^{[ideal]} & \sim f_X \otimes f_Z \otimes f_Y
+	\\
+	O_i           & \sim f_{X+U} \otimes f_{Z+V} \otimes f_Y
+	\\
+	O_i           & \sim \convo{f_X}{f_U} \otimes \convo{f_Z}{f_V} \otimes f_Y
+\end{align}
+
+\subsection{Estimation}
+
+\subsection{Points clés}
+
+Les motivations de l'utilisation d'un noyau de déconvolution avec de telles propriétés est expliqué de façon claire et concise par Han \& Park (2018) :
+
+\citer{
+	The normalization property of the kernel function is required for a projection interpretation of the SBF estimator\footnotemark, which is a key element in the theoretical development of the method. One may normalize the deconvolution kernel by scaling it up or down, but then the resulting normalized kernel loses the property of deconvoluting the effects of measurement errors.
+
+	\flushright{— Han, Park, Byeong : Smooth backfitting for errors-in-variables additive models (2018) ~\cite{han2018smooth}}
+}
+\footnotetext{C'est ce que l'on a vu précédemment dans la section \ref{sec:backfitting-convergence} : \nameref{sec:backfitting-convergence} }

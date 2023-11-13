@@ -1,7 +1,65 @@
-\chapter{Some Appendix}
+\chapter{Fléau de la dimension}
 
 \minitoc%
 
-\section{with subsection}
+Le fléau de la dimension est un aspect central de la statistique, si il était d'actualité à l'époque où les ordinateurs étaient beaucoup moins puissants qu'aujourd'hui, il s'agit d'un concept tout aussi pertinent aujourd'hui avec l'avènement du \og big data \fg où des quantités astronomiques de données sont désormais disponibles et samplées chaque seconde. Les modèles s'agrandissent\footnote{on pourrait mentionner le nombre de paramètres du modèle de langage GPT-3 : 175 milliards de paramètres\cite{brown2020language}} de jour en jour. 
+Dans cette annexe on propose de revenir brièvement sur le concept de fléau de la dimension en statistiques pour essayer de comprendre comment il se manifeste. L'annexe suivante est le résultat d'informations très dispersées sur le sujet, et je trouvais intéressant de regrouper ce que j'ai pu trouver sur le sujet dans un seul endroit dédié au sujet.
 
-\section{and another one}
+\section{Comportement du volume en augmentant la dimension}
+
+\begin{equation}
+    V_{\mathds B_n(r)} = \frac{\pi^{n/2} \cdot r^n}{\Gamma(\frac n 2 + 1)}
+\end{equation}
+
+\info{\smallskip\centering Pour rappel, la fonction $\Gamma$ croit très fortement : elle est log-convexe.}
+
+\begin{equation}
+    V_{\mathds C_n(\ell)} = \ell^n
+\end{equation}
+
+
+\section{Concentration du volume autour de la surface}
+
+\subsection{Concentration du volume autour de la surface d'une boule unité}
+
+Soit $\varepsilon > 0$, on peut contracter un objet géométrique d'un facteur $(1-\varepsilon) < 1$ en multipliant les coordonnées de chacun des points qui le composent par ce même facteur. si $P = \begin{bmatrix} x_1 \\ \vdots \\ x_d \end{bmatrix} \in Obj$ alors 
+
+\begin{equation}
+    (1-\varepsilon)P = \begin{bmatrix} (1-\varepsilon)x_1 \\ \vdots \\ (1-\varepsilon)x_d \end{bmatrix} \in (1-\varepsilon)Obj
+\end{equation}
+
+\begin{align}
+    \frac{V_{(1-\varepsilon)B_n}}{V_{B_n}}
+    & =
+    (1 - \varepsilon)^d
+    \\
+    & =
+    e^{d \, \ln(1 - \varepsilon)} \notag
+    \\
+    \frac{V_{(1-\varepsilon)B_n}}{V_{B_n}} & {\leq}
+    e^{-\varepsilon d} & \colorize[flatuicolors_aqua]{(\ln \textsf{ conc})}
+\end{align}
+
+\subsection{Concentration des points tirés aléatoirement autour de la surface}
+
+On considère des points répartis uniformémant dans la boule unité en dimension $d$. On peut définir la surface de cette boule (c'est à dire la sphère unité de dimension $d$) comme l'ensemble des points de norme $1$. Pour mieux connaître la répartition des points dans l'espace lorsque la dimension grandit, nous étudions la probabilité que la norme d'un point tiré uniformément dans la boule unité soit plus grand qu'un certain seuil.
+
+\bigskip
+
+\noindent soit $\famfinie X 1 n \sim \mathcal U\left( \mathds B_d \right)^{\otimes n}$, étudions $\proba{\norme 2 {X_i} \geq M}$ :
+
+\bigskip
+
+\noindent En particulier :
+
+\begin{equation}
+    \boxed{
+        \proba{ 
+            \norme 2 {X_i} \geq 1 - \frac{2 \ln n}{d}
+        } 
+        = 
+        1 - \mathcal O\left(\frac 1 n \right)
+    }
+\end{equation}
+
+

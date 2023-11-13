@@ -1,4 +1,80 @@
-\chapter{Code Examples}
+\chapter{Résumé de l'estimation semi-paramétrique}\label{annexe:resume-estimation-semi-parametrique}
 
-\ifnum\value{code}=1
-\fi
+
+
+\noindent\rule[1pt]{\linewidth}{0.02cm}
+
+\noindent\textbf{Estimation d'un modèle semi-paramétrique — régression non paramétrique des résidus paramétriques}
+
+\noindent\rule[1pt]{\linewidth}{0.02cm}
+\begin{circledenum}
+    \item \textbf{Estimation paramétrique :} Estimer le paramètre $\beta$ 
+        \begin{todolist}
+            \item \emph{objectif :} $\beta = \famfinie[k] \beta 1 d \in \R d$
+            \item \emph{modèle :} $y = \sum_k \beta_k x_k + \eta$
+            \item \emph{résultat :} $\widehat \beta_{MCO}$
+        \end{todolist}
+    \item \textbf{Estimation non paramétrique des résidus :} Estimer $\forall k \in \intervaleint 1 d \quad m_k$
+        \begin{todolist}
+            \item \emph{objectif :} $\eta = \sum_k m_k(x_k) + \varepsilon$
+            \item \emph{modèle :} 
+            \begin{equation*}
+                \begin{array}{rcl}
+                    y - \sum_k \beta_k x_k &=& \eta
+                    \\
+                    y - \sum_k \beta_k x_k &=& \sum_k m_k(z_k) + \varepsilon
+                    \\
+                    \gamma &=& \sum_k m_k(z_k) + \varepsilon
+                \end{array}
+            \end{equation*}
+
+            \item \emph{résultat :} $\widehat m_k^{[NW | BF]} : z \mapsto \widehat m_k^{[NW | BF]}(z \, ; \, Z_i, h )$
+        \end{todolist}
+    \item \textbf{Résultat obtenu : } $\widehat m : \famfinie[k] x 1 d , \famfinie[k] z 1 d \mapsto \sum_k \widehat \beta_k^{[MCO]} x_k + \sum_k \widehat m_k^{[NW | BF]}(z_k)$
+\end{circledenum}
+\noindent\rule[1pt]{\linewidth}{0.02cm}
+
+% ~ ————————————————————————
+% \pagebreak
+% \subsection{Résidus non paramétriques}\label{annexe:regression-sur-residus-non-param}
+
+% {
+%     \noindent\rule[1pt]{\linewidth}{0.02cm}
+%     \\
+%     \textbf{Estimation d'un modèle semi-paramétrique — régression paramétrique des résidus non paramétriques}
+%     \\
+%     \rule[1pt]{\linewidth}{0.02cm}
+%     \\
+%     \begin{circledenum}
+%         \item \textbf{Estimation non-paramétrique :} Estimer $\forall k \in \intervaleint 1 d \quad m_k$
+
+%             \begin{todolist}
+%                 \item \emph{objectif :} $m : z \equiv \famfinie[k] z 1 d \mapsto \sum\limits_{k=1}^d m_k(x_k)$
+%                 \item \emph{modèle :} $y = m(z) + \eta$
+%                 \item \emph{résultat :} $\forall k \in \intervaleint 1 d \quad \widehat m_k^{[NW | BF]} : z \mapsto \widehat m_k^{[NW | BF]}(z \, ; \, Z_i, h )$
+%             \end{todolist}
+            
+%         \item \textbf{Estimation paramétrique des résidus :}
+            
+%             \begin{todolist}
+%                 \item \emph{objectif :}
+%                 \item \emph{modèle :} 
+%                 \begin{equation*}
+%                     \begin{array}{rcl}
+%                         y &=& m(z) + \eta
+%                         \\
+%                         y - m(z) &=& \eta
+%                         \\
+%                         \gamma &=& \sum_{k=1}^d \beta_k x_k + \varepsilon
+%                     \end{array}
+%                 \end{equation*}
+%                 \item \emph{résultat :} $\widehat \beta = \famfinie[k] {\widehat \beta^{[MCO]}} 1 d$
+%             \end{todolist}
+
+%         \item \textbf{Résultat obtenu : } $\widehat m : \famfinie[k] x 1 d , \famfinie[k] z 1 d \mapsto \sum_k \widehat \beta_k^{[MCO]} x_k + \sum_k \widehat m_k^{[NW | BF]}(z_k)$
+        
+%     \end{circledenum}
+%     \rule[1pt]{\linewidth}{0.02cm}
+% }
+% \ifnum\value{code}=1
+% \fi

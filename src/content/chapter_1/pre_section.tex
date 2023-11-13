@@ -1,10 +1,10 @@
-Le statisticien est amené la plus part de son temps à modéliser les données qu'il traîte afin de pouvoir fournir une analyse et pouvoir faire de la prédiction pour ses clients. Parmis les premiers modèles qu'il apprend à manipuler, se trouve la régression linéaire avec des erreurs gaussiennes en tant que bruit blanc :
+Le statisticien est amené la plupart de son temps à modéliser les données qu'il traîte afin de pouvoir fournir une analyse et pouvoir faire de la prédiction pour ses clients. Parmis les premiers modèles qu'il apprend à manipuler, se trouve la régression linéaire avec des erreurs gaussiennes en tant que bruit blanc :
 
 \begin{equation*}
-    y = \beta_0 + \sum_{k=1}^d \beta_k x_k = \varepsilon
+    y = \beta_0 + \sum_{k=1}^d \beta_k x_k + \varepsilon
 \end{equation*}
 
-On dit alors que l'on fait une modélisation \emph{paramétrique}. En effet on suppose en premier lieu (et donc on impose) que nos données suivent un lien ici linéaire avec les covariables. On caractérise ainsi la relation entre la réponse $Y$ et les covariables $X = \begin{bmatrix} X_1 & \cdots & X_d \end{bmatrix}$ par un nombre fini de paramètres : les $\famfinie \beta i 1 n$. De manière générale un modèle paramétrique est un modèle où $y = m_\theta(x) + \varepsilon$ et $m_\theta$ est une fonction de $x$ qui est caractérisée par $\theta \in \Theta$ où $\dim \Theta < \infty$.
+On dit alors que l'on fait une modélisation \emph{paramétrique}. En effet on suppose en premier lieu (et donc on impose) que nos données suivent un lien ici linéaire avec les covariables. On caractérise ainsi la relation entre la réponse $Y$ et les covariables $X = \begin{bmatrix} X_1 & \cdots & X_d \end{bmatrix}$ par un nombre fini de paramètres : les $\famfinie \beta 1 n$. De manière générale un modèle paramétrique est un modèle où $y = m_\theta(x) + \varepsilon$ et $m_\theta$ est une fonction de $x$ qui est caractérisée par $\theta \in \Theta$ où $\dim \Theta < \infty$.
 
 De manière générale, on voit un problème de régression comme la résolution du problème suivant :
 \begin{equation}
@@ -15,8 +15,98 @@ où $\mathcal F$ est un espace de fonctions et $d$ une certaine métrique ou ce 
 
 \begin{align}
     \hat m(x) & = \argmin\limits_{m \in \mathcal F_\Theta}\left[ \ d\bigl(y, m(x)\bigr) \ \right]
-    \\
+    \notag \\
     & =  \argmin\limits_{\theta \in \Theta}\left[ \ d\bigl(y, m_\theta(x)\bigr) \ \right]
 \end{align}
 
-Cette approche permet de modéliser de façon simple les données en obtenant des vitesses de convergence rapides \citationrequise. Mais cela est évidemment à condition que la modélisation paramétrique choisie ne soit pas trop éloignée du comportement du phénomène étudié, sinon quoi le modèle ferait des prédictions, certes, mais qui n'ont pas de sens vis à vis du phénomène étudié. C'est pourquoi il existe une branche de la méthodologie statistique appelée \og statistique non paramétrique \fg qui vise à imposer le moins de restrictions à $\mathcal F$.
+Cette approche permet de modéliser de façon simple les données en obtenant des vitesses de convergence rapides ( $n^{- 1 / 2}$ pour la régression linéaire par les moindres carrés ). Mais cela est évidemment à condition que la modélisation paramétrique choisie ne soit pas trop éloignée du comportement du phénomène étudié, sans quoi le modèle ferait des prédictions, certes, mais qui n'ont pas de sens vis à vis du phénomène étudié. C'est pourquoi il existe une branche de la méthodologie statistique appelée \og statistique non paramétrique \fg qui vise à imposer le moins de restrictions à $\mathcal F$.
+
+\bigskip
+
+Cependant la statistique non paramétrique est particulièrement sujette au \og fléau de la dimension \fg. C'est à dire qu'au fur et à mesure que l'on considère de nouvelles covariables, le coût calculatoire ou le nombre de points requis pour obtenir une bonne estimation croît exponentiellement. Prenons le cas d'une régression non paramétrique à noyaux.
+
+\begin{equation*}
+    \hat m(x) = \sum\limits_{i=1}^n w_i(x) y_i \begin{cases}
+        w_i(x) = \displaystyle\frac{K\left(\frac{x - x_i}{h}\right)}{\sum\limits_{j=1}^n K\left(\frac{x - x_j}{h}\right)} \\
+        K : \text{ noyau d'ordre } r\\
+        h : \text{ fenêtre de lissage }
+    \end{cases}
+\end{equation*}
+
+Lorsque $X = \begin{bmatrix} X_1 & \cdots & X_d \end{bmatrix}$ on considère $K^* : \func{\R d}{\grandR}{x = \famfinie[k] x 1 d} {\frac 1 {h^d} \prod\limits_{k=1}^d K \left( \frac{X_k - x_k}{h} \right)}$.
+
+\bigskip
+
+\noindent On peut maintenant dériver la vitesse de convergence de l'estimateur ponctuellement en regardant la MISE de notre estimateur au point $x \in \R d$ pour estimer une fonction de classe $\mathcal C^k$ avec un noyau d'ordre $r$ :
+
+\begin{align}
+    \operatorname{MISE}(\hat m) = \ & \left[ C( \, r \, | \,  {K, \partial^rm} \,)h^{2r} + \frac{\left(\norme{\mathds L^2}{K}^2\right)^d}{nh^d} \right]\bigl( 1 + o(1)\bigr)
+    \\
+    \operatorname{MISE}(\hat m)  \underset{h \rightarrow 0}{\sim} \ \ & \frac 1 n \left[ \frac{\left(\norme{\mathds L^2}{K}^2\right)}{h} \right]^d \tend d \infty \infty
+\end{align}
+
+On constate alors que l'erreur d'estimation d'estimation explose avec la dimension qui grandit.
+On peut en fait montrer que la vitesse de convergence (uniformément sur le support) optimale d'une régression non paramétrique est $\displaystyle n^{- \frac{k-[\alpha]^{max}}{2k + d}}$\cite{10.1214/aos/1176345969}, où $[\alpha]^{max}$ est l'ordre maximal de différentiation de la fonction $m$ pour l'estimation considérée. ( par exemple, l'estimation de $\frac{\partial}{\partial x_1 \partial x_2^2} m(x_1, x_2)$ donne un $[\alpha]^{max} = 3 = \underbracket{ \ 1 \ }_{\partial x_1} + \underbracket{\ 2 \ }_{\partial x_2^2}$)
+
+ainsi :
+
+\begin{equation}
+    \widehat m(x) =  m(x) + \grandop{n^{- \frac{k}{2k + d}}}
+\end{equation}
+
+Ici le fléau de la dimension se manifeste dans la vitesse de convergence $n^{- \frac{k}{2k + \colorize{\mathbf d}}} \tend d \infty 0$.
+% Cette vitesse de convergence est dite \og atteignable \fg \cite{10.1214/aos/1176345969}. 
+En observant l'expression de la vitesse de convergence, on se dit que l'on pourrait obtenir une meilleure vitesse de convergence en réduisant la dimensionalité du problème. C'est ce qui motive l'utilisation de la modélisation suivante dite \og additive \fg :
+
+\begin{definition}[modèle additif]
+    On appelle un modèle additif, un modèle où
+
+        \begin{todolist}
+            \item $y = m(x) + \varepsilon$
+            \\
+            \item $m : \func{\R d}{\mathds R}{\famfinie[k] x 1 d}{\sum\limits_{k=1}^d m_k(x_k)}$
+            \\
+            \item avec $m_k : \func{\grandR}{\grandR}{x_k}{m_k(x_k)}$
+            
+        \end{todolist}
+        
+\end{definition}
+
+L'idée est que l'on va pouvoir désormais faire $d$ régressions non paramétriques en dimension $1$ (en lissant les $m_k$) plutôt qu'une régression en dimension $d$ (en lissant $m$) pour avoir une vitesse de convergence de la dimension $1$. Cette conjecture importante était déjà suggérée par Stone dans son article sur la vitesse de convergence des estimateurs non paramétriques en 1982 :
+
+\citer{
+    Il existe plusieurs questions intéressantes encore ouvertes qui sont liées au Théorème 1 \textcolor{flatuicolors_biscay}{[ce qu'on vient de mentionner, voir \cite{10.1214/aos/1176345969} pour plus de détails]} [\dots] La question suivante est suggérée par le succès pratique de la régression par \og projection pursuit \fg (Friedman \& Stuetzle, 1981) :
+
+    \smallskip
+    \blackboxed{Question 2}
+    \smallskip
+
+    soit $d \geq 2$, $\mathcal F = \left\{ f : \grandR^d \rightarrow \R p, f \textsf{ est }\mathcal C^k \right\}$ et $\mathcal F_{sub}$ une collection de fonctions $m$ de $\R d$ additives :
+    
+    \begin{equation*}
+        m(x_1, \dots, x_d) = \sum\limits_{p=1}^d m_p(x_p)
+    \end{equation*}
+
+    ou une collection de fonctions de la forme :
+
+    \begin{equation*}
+        m(x_1, \dots, x_d) = \psi( \sum\limits_{p=1}^d \beta_p x_p )
+    \end{equation*}
+
+    Estimons désormais sur $\mathcal F \cap \mathcal F_{sub}$ au lieu de $\mathcal F$, en posant $r_1 = \frac{k - [\alpha]^{max}}{2k + \mathbf 1}$
+
+    \question{
+        La vitesse de convergence $\boxed{ n^{-r_1}}$ est elle une vitesse de convergence atteignable ?
+    }
+
+    \flushright{— Stone, 1982 : référence \cite{10.1214/aos/1176345969}}
+}
+
+Une des méthodes que Stone mentionne est notamment l'algorithme dit de \og Backfitting \fg qui permet d'effectuer l'estimation des fonctions $m_k$ du modèle additif. Il se trouve que la réponse à cette question est \og oui \fg, en utilisant l'approche de Mammen (1999) que nous allons détailler un peu plus tard \cite{horowitz2006optimal}.
+
+\citer{
+    The asymptotically optimal minimax rates and constants of additive models are the same as they are in nonparametric regression models with one component.
+
+    \flushright{—Horowitz, Klemel{\"a}, Mammen : Optimal estimation in additive regression models (2006) \cite{horowitz2006optimal}}
+}
+
