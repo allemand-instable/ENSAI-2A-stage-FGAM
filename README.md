@@ -1,5 +1,17 @@
 # Stage 2A [ENSAI] : Modèles additifs avec covariables contaminées et généralisation du modèle additif aux données fonctionnelles 
 
+<a  href="https://mg.readthedocs.io/latexmk.html">
+    <img src="https://custom-icon-badges.demolab.com/badge/-LaTeX & Latexmk-plum?style=for-the-badge&logo=terminal&logoColor=black">
+</a>
+
+<a  href="./src/bibliography/main.bib">
+    <img src="https://custom-icon-badges.demolab.com/badge/-références bibtex-f19066?style=for-the-badge&logo=book&logoColor=black">
+</a>
+
+<a  href="https://github.com/allemand-instable/ENSAI-2A-stage-FGAM/releases/">
+    <img src="https://custom-icon-badges.demolab.com/badge/-Télécharger le rapport-38ada9?style=for-the-badge&logo=download&logoColor=black">
+</a>
+
 > Pour plus d'informations sur l'utilisation du code source se référer à mon repo [LATEX-TEMPLATE](https://github.com/allemand-instable/LaTeX-Template)
 
 Rapport de stage de 2e année dans le cadre des stages pour les élèves du cursus ingénieur de l'ENSAI (promo 2023). Le document accessible ici est le document qui a été corrigé après délibération du jury (essentiellement des fautes de frappes ou des oublis, artéfats de ré-rédaction, et erreurs mathématiques mineures ). En espérant que vous pourrez vous aider du rapport et des attendus mais surtout que vous apprécierez le contenu !
@@ -13,6 +25,11 @@ Il existe un modèle de données appelées données fonctionnelles qui sont de p
 
 
 ## compiler le rapport :
+
+
+<a  href="https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH">
+    <img src="https://custom-icon-badges.demolab.com/badge/shell-zsh-f53b57?style=for-the-badge&logo=terminal&logoColor=white">
+</a>
 
 ```zsh
 zsh compile.zsh -r
