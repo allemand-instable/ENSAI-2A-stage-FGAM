@@ -8,7 +8,7 @@ On dispose du modèle semi-paramétrique des données suivant :
 Il s'agit du modèle \og partiellement linéaire \fg, où les résidus de ce qui peut être modélisé par une partie paramétrique linéaire sont déterminés non paramétriquement afin de bénéficier au maximum des vitesses de convergence du paramétrique tout en gardant une partie de la flexibilité sur le modèle offerte par le non paramétrique.
 
 \idee{
-L'idée c'est que si l'on dispose de covariables $X = ( \underbracket{X_1, \dots, X_k}_{X_{lin}}, \underbracket{X_{k+1}, \dots, X_d}_{X_{\neg lin}})$ alors au lieu d'estimer :
+L'idée c'est que si l'on dispose de covariables $X = ( \underbracket{X_1, \dots, X_p}_{X_{lin}}, \underbracket{X_{p+1}, \dots, X_d}_{X_{\neg lin}})$ alors au lieu d'estimer :
 
 \begin{equation*}
 	\widehat m(X) = m(X) + \grandop{ n^{-\frac k {2k + d}}}
@@ -24,9 +24,9 @@ Ce qui nous permet ainsi d'obtenir les vitesses de convergence suivantes :
 
 \begin{equation*}
 	\begin{array}{rcl}
-		\widehat m(X) & = & X_{lin}^T \, \widehat \beta + \grandop{ n^{-1/2}} + \widehat g(X_{\neg lin}) + \grandop{ n^{-\frac k {2k + (d-k)}} }
+		\widehat m(X) & = & X_{lin}^T \, \widehat \beta + \grandop{ n^{-1/2}} + \widehat g(X_{\neg lin}) + \grandop{ n^{-\frac k {2k + (d-p)}} }
 		\\
-		              & = & m(X) + \grandop{\underbracket{n^{-\frac k {2k + (d-k)}}}_{\textsf{pire vitesse}}}
+		              & = & m(X) + \grandop{\underbracket{n^{-\frac k {2k + (d-p)}}}_{\textsf{pire vitesse}}}
 	\end{array}
 \end{equation*}
 
