@@ -1,143 +1,40 @@
-# LaTeX Template
+# Stage 2A [ENSAI] : Modèles additifs avec covariables contaminées et généralisation du modèle additif aux données fonctionnelles 
 
-A simple LaTeX Template, with nice structure, and commands for ease of use
+<a  href="https://mg.readthedocs.io/latexmk.html">
+    <img src="https://custom-icon-badges.demolab.com/badge/-LaTeX & Latexmk-plum?style=for-the-badge&logo=terminal&logoColor=black">
+</a>
 
-## Requirements / Dependencies
+<a  href="./src/bibliography/main.bib">
+    <img src="https://custom-icon-badges.demolab.com/badge/-références bibtex-f19066?style=for-the-badge&logo=book&logoColor=black">
+</a>
 
-| software           | what for ?                                                        | installation link                                                        |
-| ------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| latexmk            | compile with complex options and watch for changes                | [official doc](https://mg.readthedocs.io/latexmk.html)                   |
-| zsh [for now]      | shell targeted for the scripts "compile", "clear_aux" and "watch" | [oh-my-zsh tuto](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH) |
-| latex              | seems obvious                                                     | [official doc](https://www.latex-project.org/get/)                       |
-| [linux] evince     | pdf viewer                                                        |                                                                          |
-| [macos] skim       | pdf viewer                                                        | [official website](https://skim-app.sourceforge.io/)                     |
-| [windows] gsview32 | pdf viewer                                                        |                                                                          |
+<a  href="https://github.com/allemand-instable/ENSAI-2A-stage-FGAM/releases/">
+    <img src="https://custom-icon-badges.demolab.com/badge/-Télécharger le rapport-38ada9?style=for-the-badge&logo=download&logoColor=black">
+</a>
 
-## compiling and watching using `latexmk` :
+> Pour plus d'informations sur l'utilisation du code source se référer à mon repo [LATEX-TEMPLATE](https://github.com/allemand-instable/LaTeX-Template)
 
-➤ efficient way to compile and watch for changes in your LaTeX files
+Rapport de stage de 2e année dans le cadre des stages pour les élèves du cursus ingénieur de l'ENSAI (promo 2023). Le document accessible ici est le document qui a été corrigé après délibération du jury (essentiellement des fautes de frappes ou des oublis, artéfats de ré-rédaction, et erreurs mathématiques mineures ). En espérant que vous pourrez vous aider du rapport et des attendus mais surtout que vous apprécierez le contenu !
 
-If you use zsh (which I do) : [or just copy paste what's inside into your terminal]
+## Introduction
 
-```zsh
-zsh compile.zsh
-```
+Pendant le cursus 2A réalisé à l’ENSAI, les étudiants découvrent la régression non paramétrique qui permet d’estimer la loi conditionnelle d’une réponse vis à vis de covariables sans hypothèse sur la forme de la relation entre la réponse et les covariables. On peut alors complexifier les modèles de données que l’on considère en tirant avantage des bénéfices de l’approche paramétrique, aux vitesses de convergence rapide des estimateurs, et de l’approche non paramétrique, flexible et plus robuste à l’erreur de choix du modèle. On appelle cela une méthode « semi-paramétrique ». Un modèle semi-paramétrique courant est le modèle partiellement linéaire avec la composante non paramétrique supposée additive. L’ensemble des concepts et des motivations sont introduites dans ce stage.
 
-```zsh
-zsh watch.zsh
-```
 
-### flags
+Il existe un modèle de données appelées données fonctionnelles qui sont de plus en plus présentes dans différents champs d’application de la statistique : santé, sport, industrie . . .. De la théorie a déjà été produite sur la régression fonctionnelle. Peut-on faire de la régression semi-paramétrique fonctionnelle ? Le sujet de ce stage est l’étude à partir de diverses res-sources bibliographiques sur la régression semi paramétrique, de comprendre dans un premier lieu à partir du savoir d’un étudiant de 2e année du cursus ingénieur de l’ENSAI la méthodologie derrière la régression semi-paramétrique du modèle partiellement-linéaire dans le cadre réel. Enfin on pourra rendre compte des difficultés rencontrées ainsi que les différences et similarités dans les approches lors de l’extension des méthodes du modèle additif au cadre fonctionnel.
 
-```zsh
-zsh compile.zsh -d      # compiles documentation only
-zsh compile.zsh -r      # compiles report only
-zsh compile.zsh -t      # compiles tests only
-zsh compile.zsh -h      # flags help
-# —— Exclusive to compile ———
-zsh compile.zsh         # compile all files (doc/report/test)
-```
 
-The same applies to watch script
+## compiler le rapport :
 
-### other shells
 
-if you use another shell (bash/...) you might have to adapt the script [chatGPT if you are hurry] to the targeted shell.
-
-## project strcuture
-
-```
-📦LaTeX-Template
- ┣ 📂aux_files              ‹◀ latex compiling aux files (cache)
- ┣ 📂doc                    ‹◀ github README
- ┣ 📂out                    ‹◀ compiled files
- ┃ ┣ 📜documentation.pdf
- ┃ ┣ 📜rapport.pdf
- ┃ ┣ 📜tests.pdf
- ┣ 📂src                    ‹◀ actual project source code
- ┣ 📜.latexmkrc             ‹◀ compile settings
- ┣ 📜clear_aux.zsh
- ┣ 📜compile.zsh
- ┗ 📜watch.zsh
-```
-
-## documentation
-
-The documentation can be accessed easily in a pdf format at the location :
-
-```
-📦LaTeX-Template
- ┣ 📂out                    ‹◀ compiled files
- ┃ ┣ 📜documentation.pdf        ← formatted custom commands and settings documentation
- ┃ ┣ 📜rapport.pdf
- ┃ ┣ 📜tests.pdf
-```
-
-If the user prefers in a markdown format : it can be found [here](./doc/doc.md) (📁 `doc/doc.md`)
-
-## testing
-
-```
-📦LaTeX-Template
- ┣ 📂out                    ‹◀ compiled files
- ┃ ┣ 📜documentation.pdf
- ┃ ┣ 📜rapport.pdf
- ┃ ┣ 📜tests.pdf                ← testing commands and environments
-```
-
-## Packages (todo):
-
- <!-- TODO -->
-
-The project `Latex-Template` relies on the following latex packages
-
-| package      | used for                                             | `include/pacakges/` |
-| ------------ | ---------------------------------------------------- | ------------------- |
-| inputenc     | utf-8 input                                          |                     |
-| fontenc      | font encoding                                        |                     |
-| graphicx     | including images                                     |                     |
-| amsmath      | maths                                                |                     |
-| amssymb      | maths                                                |                     |
-| hyperref     | url links with custom text                           |                     |
-| dsfont       | double stroke : better than `\mathbb`                |                     |
-| babel        | french names for envs                                |                     |
-| url          | typesetting URLs                                     |                     |
-| pgfplots     | latex curve graphs                                   |                     |
-| stmaryrd     | symbols for computer science                         |                     |
-| mathtools    | convenient convergence arrows                        |                     |
-| —            | —                                                    | —                   |
-| avant        | font                                                 |                     |
-| fontawesome5 | icons [`\info` / `\warn` ...]                        |                     |
-| mfirstuc     | capitalizing the first letter of a word              |                     |
-| float        | improved interface for floating objects              |                     |
-| multirow     | table cells spanning multiple rows                   |                     |
-| awesomebox   | env with bar at the left [`\info` / `\warn` ...]     |                     |
-| minitoc      | table of content of the chapter                      |                     |
-| minted       | code highlight                                       |                     |
-| table        | tables                                               |                     |
-| xcdraw       | drawing tables with TikZ                             |                     |
-| xcolor       | custom colors                                        |                     |
-| array        | extending the array and tabular environments         |                     |
-| booktabs     | publication quality tables                           |                     |
-| tabularx     | beautiful tables with adjustable-width column        |                     |
-| algorithm2e  | algorithm environments                               |                     |
-| footmisc     | make sure footnotes are bellow                       |                     |
-| comment      | commenting out large blocks of code with env         |                     |
-| tikz         | creating graphics programmatically                   |                     |
-| tikz-cd      | creating commutative diagrams                        |                     |
-| framed       | framed or shaded regions that can break across pages |                     |
-| multicol     | typesetting documents with multiple columns          |                     |
-| changepage   | margin adjustment and detection of odd/even pages    |                     |
----
+<a  href="https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH">
+    <img src="https://custom-icon-badges.demolab.com/badge/shell-zsh-f53b57?style=for-the-badge&logo=terminal&logoColor=white">
+</a>
 
 ```zsh
-
+zsh compile.zsh -r
 ```
 
-```latex
 
-```
 
-```python
 
-```
