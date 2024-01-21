@@ -320,8 +320,17 @@
 
             Alors, \textbf{à condition que $\mathbf{\int K d\lambda= 1}$} et sous hypothèses de dépendance faible\footnotemark \, et de régularité du noyau et de la fonction cible, l'estimation du modèle par l'algorithme du Backfitting est une projection au sens de la géométrie induite par $\prodscalselon \cdot \cdot *$, les projecteurs existent et sont bien définis. Les vitesses de convergence de dimension $1$ sont bien atteignables.
         }
-    \footnotetext[2]{\faExclamationTriangle \; \textbf{simplification :} toujours par soucis de concision, \emph{seule l'idée générale est ici restituée}. C'est en réalité un peu plus compliqué : on montre dans un premier temps que l'opérateur travaillant sur les quantités que l'on souhaite estimer $T$ est contractant pour la norme $\norme * \cdot$ sur $\mathcal F_{add}$, puis on définit un opérateur \og empirique \fg travaillant sur les données que l'on manipule (en tant que praticien) $\widehat T$, enfin on montre que l'opérateur \og empirique \fg converge vers l'opérateur \og idéal \fg : $\opnorm{\widehat T - T}_{\mathds L( \hat p \,\cdot \,\lambda )} = o_P(1)$ pour en déduire que l'on contrôle la norme opérateur \og empirique \fg si l'on contrôle la norme opérateur \og idéale \fg. La probabilité que la solution du Backfitting s'écarte de la solution de notre problème statistique est alors pleinement contrôlée par le paramètre de contrôle de la norme opérateur de $T$ et $\widehat T$.}
-    \footnotetext[3]{La notion de dépendance faible utilisée est la notion dite de \og strong alpha-mixing \fg, on pourra se référer à \cite{bradley2005basic} pour une introduction au sujet. }
+    \footnotetext[2]{
+        \faExclamationTriangle \; \textbf{simplification :} toujours par soucis de concision, \emph{seule l'idée générale est ici restituée}. 
+        C'est en réalité un peu plus compliqué : on montre dans un premier temps que l'opérateur travaillant sur les quantités que l'on souhaite estimer $T$ est contractant pour la norme $\norme * \cdot$ sur $\mathcal F_{add}$. 
+        Puis, on définit un opérateur \og empirique \fg travaillant sur les données que l'on manipule (en tant que praticien) $\widehat T$. 
+        Enfin on montre que l'opérateur \og empirique \fg converge vers l'opérateur \og idéal \fg : $\opnorm{\widehat T - T}_{\mathds L( \hat p \,\cdot \,\lambda )} = o_P(1)$. 
+        Cela permet de déduire que l'on contrôle la norme opérateur \og empirique \fg si l'on contrôle la norme opérateur \og idéale \fg. 
+        La probabilité que la solution du Backfitting s'écarte de la solution de notre problème statistique est alors pleinement contrôlée par le paramètre de contrôle de la norme opérateur de $T$ et $\widehat T$.
+    }
+    \footnotetext[3]{
+        La notion de dépendance faible utilisée est la notion dite de \og strong alpha-mixing \fg, on pourra se référer à \cite{bradley2005basic} pour une introduction au sujet. 
+    }
     % TODO : annexe:indep-faible —> strongly alpha mixing
     }
 }
