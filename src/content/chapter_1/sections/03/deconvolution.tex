@@ -209,17 +209,26 @@ La réponse est oui, le noyau proposé par Han, Park \& Byeong (2018) \cite{han2
 De façon plus formelle :
 \begin{equation}
     \tilde K_h^\star(z, Z^*) =
-    \frac 1 {2\pi h}
-    \displaystyle\int_{\grandR}
-    e^{-i \omega \left(\frac{z - Z^*}{h}\right)}
-    \cdot
+    \displaystyle
+    \frac{1}{2\pi h}
+    \int 
+    e^{-i\omega \frac{z-Z^*}{h}} 
+    \cdot 
     \frac
-    {\phi_{K_{h, \lVert \cdot \rVert}}^{[\, z\, ]}( \omega \, ; \, h) \phi_K(\omega)}
-    {\phi_V(\omega)}
-    \, d\omega    
+    { 
+        \phi_{
+            K_{\, \lVert \, \bullet \, \rVert}^{[\,\int \,]}
+        }
+        (\omega \,, z\, \vert \, h) 
+        \phi_K(\omega)
+    }
+    {
+        \phi_u\left(\frac \omega h\right)
+    }
+    d\omega
 \end{equation}\label{eq:norm_deconvolution_kernel}
 
-où $\quad \phi_{K_{h, \lVert \cdot \rVert}}^{[\, z\, ]}( \omega \, ; \, h) = \int e^{i \omega \left(\frac{z-u}{h}\right)} K_{h, \lVert \cdot \rVert}^{[\, u \,]}(z) du$
+où $\phi_{K_{\, \lVert \, \bullet \, \rVert}^{[\,\int \,]}}(\omega \,, z\, \vert \, h) = \int e^{i \omega \left(\frac{z-u}{h}\right)} K_{h, \lVert \cdot \rVert}^{[\, u \,]}(z)  \, du$ est la transformée de fourier selon les points de centrage (les $Z^*$ observés).
 
 \subsubsection{Propriétés asymptotiques}
 

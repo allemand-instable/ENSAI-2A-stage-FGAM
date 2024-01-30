@@ -61,6 +61,8 @@
 	$\phi_X$ & Fonction caractéristique de la variable aléatoire $X$ : \linebreak $$\phi_X : \func{\grandR}{\mathds C}{\omega}{\esperance{e^{i \omega X}}}$$ \\
 	$\phi_{\textsf{erreur}}$ & Fonction caractéristique de l'erreur de mesure $U$ aussi appelée $\phi_u$ quand il n'y a pas d'ambiguïté
 	\\
+	$\phi_{K_{\, \lVert \, \bullet \, \rVert}^{[\,\int \,]}}(\omega \,, x\, \vert \, h)$ & transformée de fourier du noyau de lissage normalisé selon les points de centrage au point $x$ pour la fréquence $\omega$ : $\int e^{i \omega \frac{x-\mathbf u}h} K_{h, \Vert \cdot \Vert}^{[\mathbf u]}(x) d\mathbf u$
+	\\
 	\midrule
 	\textbf{Noyaux}
 	                  &
@@ -86,7 +88,7 @@
 	                  & Noyau de déconvolution basé sur le noyau de lissage $K$ : \linebreak $$\tilde K_h : \func{\grandR}{\Rplus}{t}{\displaystyle\frac 1 {2\pi} \int e^{-iut} \frac{\mathcal F_{\textsf{stat}}[K](hu)}{\phi_{\textsf{erreur}}(u)} du} $$
 	\\\\
 	$\tilde K_h^\star$ 
-	                  & Noyau de déconvolution normalisé basé sur le noyau de lissage $K$ :\linebreak $$\tilde K_h^\star : \func{\grandR}{\Rplus}{t}{\displaystyle\frac{1}{2\pi h}\int e^{-i\omega \frac{x-X^*}{h}} \cdot \frac{\phi_{K, \, \Vert \, \cdot \, \Vert}^{[\,x\,]}(\omega \,;\, h)\phi_K(\omega)}{\phi_u\left(\frac \omega h\right)}}$$ 
+	                  & Noyau de déconvolution normalisé basé sur le noyau de lissage $K$ :\linebreak $$\tilde K_h^\star : \func{\grandR}{\Rplus}{x}{\displaystyle\frac{1}{2\pi h}\int e^{-i\omega \frac{x-X^*}{h}} \cdot \frac{ \phi_{K_{\, \lVert \, \bullet \, \rVert}^{[\,\int \,]}}(\omega \,, x\, \vert \, h) \phi_K(\omega)}{\phi_u\left(\frac \omega h\right)}d\omega} $$ 
 	\\
 	\bottomrule
 \end{tabularx}
